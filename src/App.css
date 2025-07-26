@@ -9,11 +9,20 @@ html, body, #root {
   height: 100%;
   width: 100%;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f0f2f5;
+  /* 🖼️ Aqui aplicamos a imagem de fundo */
+  background-image: url('/floresta.jpeg'); /* Certifique-se que a imagem está em public/ */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* mantém o fundo fixo mesmo com scroll */
 }
 
 /* Container principal centralizado */
 .container {
+  position: relative; /* necessário para posicionamento interno da imagem */
+  /* ... seus outros estilos */
+    padding-top: 100px; /* espaço para o título fixo */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,30 +30,35 @@ html, body, #root {
   min-height: 100vh;
   padding: 2rem;
   text-align: center;
-  background-color: #fff;
+   padding-top: 80px; /* Espaço para o título fixo */
+  position: relative;
+
+  /* 🔳 Fundo translúcido */
+  background-color: rgba(255, 255, 255, 0.4);
+
   max-width: 600px;
   margin: auto;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
 /* Títulos e textos */
 h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: #0f0f0f;
   margin-bottom: 1rem;
 }
 
 h2 {
   font-size: 1.8rem;
-  color: #555;
+  color: #0a0a0a;
   margin-bottom: 0.5rem;
 }
 
 p {
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  color: #666;
+  color: #0a0a0a;
 }
 
 /* Formulário */
@@ -122,3 +136,167 @@ button:hover {
   padding: 4px 0;
   border-bottom: 1px solid #eee;
 }
+.logo-canto {
+  position: absolute;
+  bottom: 20px;
+  left: 83%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  opacity: 0.9;
+}
+
+/* ------------------ ALTERAÇÕES PARA GRUPOS E CERCAMENTOS ------------------ */
+
+/* Grupo mantém o tamanho fixo, não aumenta */
+.grupo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+  /* altura fixa para evitar mudança de tamanho ao clicar */
+  min-height: 60px;
+}
+
+/* Caixa do grupo */
+.grupo-box {
+  height: 60px;
+  background-color: #f2f2f2;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.grupo-box:hover {
+  background-color: #e0e0e0;
+}
+
+.grupo-box.selecionado {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+/* Container para cercas e números */
+.cercamento-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grid dos cercas: 4 colunas, largura fixa e centralizados */
+.cercas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Grid dos números: 8 colunas, largura fixa e centralizados */
+.numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 40px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Caixa de cercas e números */
+.cerca-box, .numero-box {
+  height: 40px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  user-select: none;
+  width: 80px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Ajusta largura dos números (menores que cercas) */
+.numero-box {
+  width: 40px;
+  font-size: 13px;
+}
+
+.cerca-box:hover, .numero-box:hover {
+  background-color: #ddd;
+}
+
+/* Estado selecionado */
+.numero-box.selecionado, .cerca-box.selecionado {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Container superior com saldo no topo direito e título centralizado */
+.topo-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+/* Título centralizado no container */
+.titulo-jogo {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #0f0f0f;
+  margin: 0;
+}
+
+/* Saldo no canto superior direito */
+
+.saldo-box {
+  position: fixed; /* 🔧 Agora fica fixo na tela */
+  top: 10px;       /* Distância do topo da janela */
+  right: 350px;     /* Distância da lateral direita */
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000; /* 🔝 Garante que fique por cima de outros elementos */
+}
+.titulo-fixo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0f0f0f;
+  z-index: 999;
+  
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.cercamento-reservado {
+  min-height: 280px; /* altura fixa que evita o "salto" */
+  transition: all 0.3s ease;
+}
+
+

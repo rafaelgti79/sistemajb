@@ -18,6 +18,71 @@ function App() {
   const [historico, setHistorico] = useState([]);
   const [portaSerial, setPortaSerial] = useState(null);
   const [printerStatus, setPrinterStatus] = useState('🔌 Procurando impressora...');
+  const [selecionado1, setSelecionado1] = useState(false);
+const [selecionado2, setSelecionado2] = useState(false);
+const [selecionado3, setSelecionado3] = useState(false);
+const [selecionado4, setSelecionado4] = useState(false);
+const [selecionado5, setSelecionado5] = useState(false);
+const [selecionado6, setSelecionado6] = useState(false);
+const [selecionado7, setSelecionado7] = useState(false);
+const [selecionado8, setSelecionado8] = useState(false);
+const [selecionado9, setSelecionado9] = useState(false);
+const [selecionado10, setSelecionado10] = useState(false);
+const [selecionado11, setSelecionado11] = useState(false);
+const [selecionado12, setSelecionado12] = useState(false);
+const [mostrarCercas, setMostrarCercas] = useState(false);
+const [numerosSelecionados, setNumerosSelecionados] = useState([]);
+const [cercSelecionado, setCercSelecionado] = useState(null);
+
+// ==== INÍCIO DA ALTERAÇÃO: função para alternar cercas =====
+  const toggleCerc = (num) => {
+    if (cercSelecionado === num) {
+      // clicou no mesmo cerc, limpar seleção (desistiu)
+      setCercSelecionado(null);
+      setNumerosSelecionados([]);
+    } else {
+      // seleciona o cerc e marca os números de 1 até num
+      setCercSelecionado(num);
+      const nums = Array.from({ length: num }, (_, i) => i + 1);
+      setNumerosSelecionados(nums);
+    }
+  };
+  // ==== FIM DA ALTERAÇÃO =====
+
+ // ==== INÍCIO DA ALTERAÇÃO: função para alternar números individualmente =====
+  const toggleNumero = (num) => {
+    if (numerosSelecionados.includes(num)) {
+      setNumerosSelecionados(numerosSelecionados.filter(n => n !== num));
+    } else {
+      setNumerosSelecionados([...numerosSelecionados, num]);
+    }
+  };
+  // ==== FIM DA ALTERAÇÃO =====
+
+  // ==== INÍCIO DA ALTERAÇÃO: limpar cercas e números quando grupo for desmarcado =====
+  useEffect(() => {
+    if (!selecionado1) {
+      setCercSelecionado(null);
+      setNumerosSelecionados([]);
+    }
+  }, [selecionado1]);
+  // ==== FIM DA ALTERAÇÃO =====
+
+const selecionarCercamento = (limite) => {
+  const novosNumeros = Array.from({ length: limite }, (_, i) => i + 1);
+  setNumerosSelecionados(novosNumeros);
+};
+
+
+  //função para mudar de cor quando clicar 
+  const toggleSelecionado = (index) => {
+  setSelecionados((prev) =>
+    prev.includes(index)
+      ? prev.filter((i) => i !== index)
+      : [...prev, index]
+  );
+};
+
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -194,19 +259,146 @@ const result = encoder.encode();
 
   return (
     <div className="container">
-      <h1>🎰 Jogo do Bicho</h1>
-      <h2>Saldo R$: {credito}</h2>
-      <p>Aperte a tecla <strong>P</strong> para adicionar 1 crédito</p>
+
+      <div className="topo-container">
+   <div className="saldo-box">Saldo R$: {credito}</div> {/* 🪙 Agora fixo no topo */}
+  <h1 className="titulo-fixo">Jogo do Bicho</h1>
+
+</div>
+
+      
+<div className="grupo-grid">
+  <div
+    className={`grupo-box ${selecionado1 ? 'selecionado' : ''}`}
+  onClick={() => {
+    setSelecionado1(!selecionado1);
+    setMostrarCercas(!mostrarCercas);
+  }}
+  >
+    Grupo
+  </div>
+  <div
+    className={`grupo-box ${selecionado2 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado2(!selecionado2)}
+  >
+    Dezena
+  </div>
+  <div
+    className={`grupo-box ${selecionado3 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado3(!selecionado3)}
+  >
+    Centena
+  </div>
+  <div
+    className={`grupo-box ${selecionado4 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado4(!selecionado4)}
+  >
+    Milhar
+  </div>
+  <div
+    className={`grupo-box ${selecionado5 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado5(!selecionado5)}
+  >
+    Duque de Grupo
+  </div>
+  <div
+    className={`grupo-box ${selecionado6 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado6(!selecionado6)}
+  >
+    Duque de Dezena
+  </div>
+  <div
+    className={`grupo-box ${selecionado7 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado7(!selecionado7)}
+  >
+    Terno de Dezena
+  </div>
+  <div
+    className={`grupo-box ${selecionado8 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado8(!selecionado8)}
+  >
+    Terno de Grupo
+  </div>
+  <div
+    className={`grupo-box ${selecionado9 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado9(!selecionado9)}
+  >
+    Milhar e Centena
+  </div>
+  <div
+    className={`grupo-box ${selecionado10 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado10(!selecionado10)}
+  >
+    Dezeninha
+  </div>
+  <div
+    className={`grupo-box ${selecionado11 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado11(!selecionado11)}
+  >
+    Duque de Dez. DME
+  </div>
+  <div
+    className={`grupo-box ${selecionado12 ? 'selecionado' : ''}`}
+    onClick={() => setSelecionado12(!selecionado12)}
+  >
+    Terno de Dez.DME
+  </div>
+  
+
+</div>
+
+  {/* ==== INÍCIO DA ALTERAÇÃO: mostrar cercas e números só se Grupo estiver selecionado ==== */}
+     <div className="cercamento-reservado">
+  {selecionado1 && (
+    <>
+      <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center' }}>
+        {[5, 6, 7, 8].map(num => (
+          <div
+            key={num}
+            className={`cerca-box ${cercSelecionado === num ? 'selecionado' : ''}`}
+            onClick={() => toggleCerc(num)}
+            style={{ cursor: 'pointer', margin: '0 10px' }}
+          >
+            Cerc.{num}
+          </div>
+        ))}
+      </div>
+
+      <div className="numeros-grid" style={{ marginTop: '10px', justifyContent: 'center' }}>
+        {Array.from({ length: 8 }, (_, i) => i + 1).map(num => (
+          <div
+            key={num}
+            className={`numero-box ${numerosSelecionados.includes(num) ? 'selecionado' : ''}`}
+            onClick={() => toggleNumero(num)}
+            style={{ cursor: 'pointer', margin: '0 5px' }}
+          >
+            {num}
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+</div>
+
+      {/* ==== FIM DA ALTERAÇÃO ==== */}
+
+      
+
+
 
       <div className="form">
         <input
           type="number"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="Grupo (0 a 24)"
           value={grupo}
           onChange={(e) => setGrupo(e.target.value)}
         />
         <input
           type="number"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="Valor da aposta"
           value={valor}
           onChange={(e) => setValor(e.target.value)}
@@ -229,14 +421,9 @@ const result = encoder.encode();
         ))}
       </ul>
 
-      <h3>Grupos do Jogo do Bicho</h3>
-      <ul className="grupos">
-        {bichos.map((bicho, index) => (
-          <li key={index}>
-            {index} - {bicho}
-          </li>
-        ))}
-      </ul>
+      
+            <img src="./public/Pixmaquina.png" alt="Bicho logo" className="logo-canto" />
+
     </div>
   );
 }
