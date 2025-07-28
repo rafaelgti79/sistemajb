@@ -51,14 +51,14 @@ h1 {
 
 h2 {
   font-size: 1.8rem;
-  color: #0a0a0a;
+  color: #0f0f0f;
   margin-bottom: 0.5rem;
 }
 
 p {
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  color: #0a0a0a;
+  color: #0f0f0f;
 }
 
 /* Formulário */
@@ -97,7 +97,7 @@ button:hover {
 .mensagem {
   font-weight: bold;
   margin: 1rem 0;
-  color: #2c3e50;
+  color: #0f0f0f;
 }
 
 /* Histórico */
@@ -129,7 +129,7 @@ button:hover {
   margin-top: 2rem;
   padding-top: 1rem;
   font-size: 0.95rem;
-  color: #333;
+  color: #0f0f0f;
 }
 
 .grupos li {
@@ -173,6 +173,7 @@ button:hover {
   transition: 0.3s ease;
   user-select: none;
   box-sizing: border-box;
+  color: #0f0f0f;
 }
 
 .grupo-box:hover {
@@ -228,6 +229,7 @@ button:hover {
   width: 80px;
   box-sizing: border-box;
   font-size: 14px;
+  color: #0f0f0f;
 }
 
 /* Ajusta largura dos números (menores que cercas) */
@@ -275,7 +277,7 @@ button:hover {
   padding: 8px 16px;
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #0f0f0f;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   z-index: 1000; /* 🔝 Garante que fique por cima de outros elementos */
 }
