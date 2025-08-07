@@ -227,12 +227,27 @@ const adicionarDuqueGrupoAleatorio = () => {
   } while (duqueGrupoPalpites.includes(novo));
   setDuqueGrupoPalpites([...duqueGrupoPalpites, novo]);
 };
+//--------------------//----------------------//
 
-const toggleDuqueGrupoNumero = (num) => {
+/* const toggleDuqueGrupoNumero = (num) => {
   if (duqueGrupoPalpites.includes(num)) {
     setDuqueGrupoPalpites(duqueGrupoPalpites.filter(n => n !== num));
   } else {
     setDuqueGrupoPalpites([...duqueGrupoPalpites, num]);
+  }
+}; */
+
+const toggleDuqueGrupoNumero = (num) => {
+  if (duqueGrupoPalpites.includes(num)) {
+    // Se já está incluído, remove
+    setDuqueGrupoPalpites(duqueGrupoPalpites.filter(n => n !== num));
+  } else {
+    // Se ainda não está incluso, adiciona apenas se tiver menos de 20
+    if (duqueGrupoPalpites.length < 20) {
+      setDuqueGrupoPalpites([...duqueGrupoPalpites, num]);
+    } else {
+      alert("Você só pode selecionar até 20 números.");
+    }
   }
 };
 
