@@ -246,7 +246,7 @@ const toggleDuqueGrupoNumero = (num) => {
     if (duqueGrupoPalpites.length < 20) {
       setDuqueGrupoPalpites([...duqueGrupoPalpites, num]);
     } else {
-      alert("Você só pode selecionar até 20 números.");
+      alert("Você só pode selecionar até 20 Grupos.");
     }
   }
 };
