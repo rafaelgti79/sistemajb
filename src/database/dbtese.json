@@ -1,0 +1,31 @@
+{
+
+   "dataExtracao": "15/07/2025",
+   "horarioExtracao": "14 Horas",
+   "ponto": 12,
+   "usuario":252,
+   "token": "fre5567hhdg",
+   "palpites": [
+    {
+        "modalidade": 1,
+        "palpite": "14,12",
+        "valor": 10.00,
+        "cercado": "10000000",
+        "invertido": 0
+    },
+
+    {
+        "modalidade": 4,
+        "palpite": "1465,1298,3312",
+        "valor": 10.00,
+        "cercado": "11111000",
+        "invertido": 1
+    }
+
+
+   ]
+
+
+
+}
+

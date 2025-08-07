@@ -1,0 +1,207 @@
+{
+  "extracoes": [
+    {
+      "id": "1",
+      "dataExtracao": "15/07/2025",
+      "horarioExtracao": "14 Horas",
+      "ponto": 12,
+      "usuario": 252,
+      "token": "fre5567hhdg",
+      "palpites": [
+        {
+          "modalidade": 1,
+          "palpite": "14,12",
+          "valor": 10,
+          "cercado": "10000000",
+          "invertido": 0
+        },
+        {
+          "modalidade": 4,
+          "palpite": "1465,1298,3312",
+          "valor": 10,
+          "cercado": "11111000",
+          "invertido": 1
+        }
+      ]
+    },
+    {
+      "id": "2f51",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "10:17:03",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "79f1b199-9be9-4cfd-b769-716388166d31",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 10,
+          "cercado": "10000000",
+          "invertido": 0
+        },
+        {
+          "id": "82aaa3de-defd-432a-9f2c-88668264a7f7",
+          "modalidade": "1",
+          "palpite": "09,10",
+          "valor": 10,
+          "cercado": "10000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "ad93",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "10:45:25",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "ddd0dad2-1665-4ecc-bfb9-5d39a055ea19",
+          "modalidade": "1",
+          "palpite": "01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20",
+          "valor": 10,
+          "cercado": "10000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "8ed2",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "91cd9341-87d9-41bf-9fad-47fd193037c8",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "10000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "cfb4",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "18:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "c94da327-0a3d-4a65-8eab-35f1b372ca21",
+          "modalidade": "1",
+          "palpite": "11,12",
+          "valor": null,
+          "cercado": "10000000",
+          "invertido": 0
+        },
+        {
+          "id": "a2f99cf3-4fac-4b57-9cda-1dee007c4b84",
+          "modalidade": "1",
+          "palpite": "06,07",
+          "valor": 10,
+          "cercado": "10000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0299",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "11:56:50",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "62cd38f8-3b37-458c-b76f-2e028e5b4344",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 10,
+          "cercado": "10000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "82c8",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "12:05:11",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "8d56f3f3-0a5d-4de6-ae83-e6faaa53ad5c",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "edfd",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a30ba91f-830c-4ba8-a4a4-4dcc65e0f8b4",
+          "modalidade": "1",
+          "palpite": "06,07",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    }
+  ],
+  "palpites": [],
+  "pontos": [
+    {
+      "id": "1",
+      "nome": "Ponto 1",
+      "descricao": "Descrição do ponto 1",
+      "localizacao": "Rua A, 123",
+      "dataCadastro": "2025-07-15",
+      "usuarioId": 453
+    },
+    {
+      "id": "2",
+      "nome": "Ponto 2",
+      "descricao": "Descrição do ponto 2",
+      "localizacao": "Rua B, 456",
+      "dataCadastro": "2025-07-20",
+      "usuarioId": 252
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "252",
+      "nome": "João Silva",
+      "email": "joao.silva@email.com",
+      "senha": "senha123",
+      "telefone": "1234-5678",
+      "dataCadastro": "2025-01-10"
+    },
+    {
+      "id": "453",
+      "nome": "Maria Oliveira",
+      "email": "maria.oliveira@email.com",
+      "senha": "senha456",
+      "telefone": "8765-4321",
+      "dataCadastro": "2025-03-15"
+    }
+  ]
+}
