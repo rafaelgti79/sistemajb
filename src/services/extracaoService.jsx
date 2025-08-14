@@ -71,35 +71,87 @@ export const atualizarPalpiteNoServidor = async (id, palpiteAtualizado) => {
 //Salvar palpite
 export const adicionarPalpiteService = ({
   grupoSelecionado,
+  grupoPalpites,
+  dezenaPalpites,
+  centenaPalpites,
+  milharPalpites,
   duqueGrupoPalpites,
+  duqueDezenaPalpites,
   valor,
   cercSelecionado,
   palpitesSalvos,
   setPalpitesSalvos,
+  ternoDezenaPalpites,
+  ternoGrupoPalpites,
+  milharCentenaPalpites,
+  dezeninhaPalpites,
+  globalInvertido,
   setNumerosSelecionados,
   setCercSelecionado,
   horarioSelecionado
 }) => {
-  if (!duqueGrupoPalpites.length) return;
+  let numerosSelecionadosFormatados = '';
+
+  if (grupoSelecionado === '1' && grupoPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(grupoPalpites);
+  }
+
+  if (grupoSelecionado === '2' && dezenaPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(dezenaPalpites);
+  }
+
+  if (grupoSelecionado === '3' && centenaPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(centenaPalpites);
+  }
+   if (grupoSelecionado === '4' && milharPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(milharPalpites);
+  }
+
+  if (grupoSelecionado === '5' && duqueGrupoPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(duqueGrupoPalpites);
+  }
+
+  if (grupoSelecionado === '6' && duqueDezenaPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(duqueDezenaPalpites);
+  }
+
+  if (grupoSelecionado === '7' && ternoDezenaPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(ternoDezenaPalpites);
+  }
+
+  if (grupoSelecionado === '8' && ternoGrupoPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(ternoGrupoPalpites);
+  }
+
+  if (grupoSelecionado === '9' && milharCentenaPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(milharCentenaPalpites);
+  }
+
+  if (grupoSelecionado === '10' && dezeninhaPalpites.length) {
+    numerosSelecionadosFormatados = formatarComDoisDigitos(dezeninhaPalpites);
+  }
+
+  if (!numerosSelecionadosFormatados) return;
 
   const novoPalpite = {
-    id: uuidv4(), // Gera um ID único
+    id: uuidv4(),
     modalidade: grupoSelecionado,
-    palpite: formatarComDoisDigitos(duqueGrupoPalpites),
+    palpite: numerosSelecionadosFormatados, // todos juntos no mesmo palpite
     valor: parseFloat(valor.replace(',', '.')),
     cercado: gerarCercado(cercSelecionado),
-    invertido: 0,
-    horarioSelecionado
+    invertido: globalInvertido,
+    horarioSelecionado,
+    grupo: grupoSelecionado, // associa o grupo atual ao palpite
   };
 
-  // Apenas salva localmente
+  // Adiciona no array de palpites
   setPalpitesSalvos([...palpitesSalvos, novoPalpite]);
 
-  // Limpa inputs
-  //setNumerosSelecionados([]);
-  //setCercSelecionado(null);
-  
+  // Se quiser limpar seleção
+  // setNumerosSelecionados([]);
+  // setCercSelecionado(null);
 };
+
 
 
 

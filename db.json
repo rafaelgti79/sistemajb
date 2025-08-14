@@ -165,6 +165,3276 @@
           "invertido": 0
         }
       ]
+    },
+    {
+      "id": "2e4c",
+      "dataExtracao": "07/08/2025",
+      "horarioExtracao": "17:09:28",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0353bbba-8a5d-471d-a9e8-7e5ee6bd36a8",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "10000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "88af",
+      "dataExtracao": "08/08/2025",
+      "horarioExtracao": "23:14:02",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "5325e114-c035-4828-aa27-57a23ffd4676",
+          "modalidade": "1",
+          "palpite": "01",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "de328754-b414-4080-98b9-b4be2a62052b",
+          "modalidade": "1",
+          "palpite": "02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "7becf36d-9505-47f3-b8ed-b60cb5966416",
+          "modalidade": "2",
+          "palpite": "06",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "4849fe6d-64a4-4471-b7eb-4a070ca7c929",
+          "modalidade": "2",
+          "palpite": "07",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0610",
+      "dataExtracao": "08/08/2025",
+      "horarioExtracao": "23:33:33",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e9b1a5a5-d405-4063-b54b-27d0d0c58645",
+          "modalidade": "2",
+          "palpite": "01,23,79",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4c65",
+      "dataExtracao": "08/08/2025",
+      "horarioExtracao": "23:35:59",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "52fd44a2-2ba7-4af0-866c-98d01ab97f89",
+          "modalidade": "2",
+          "palpite": "81,34,79",
+          "valor": null,
+          "cercado": "11111000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "9fd5",
+      "dataExtracao": "08/08/2025",
+      "horarioExtracao": "23:36:59",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "4be231db-5f5e-4b45-a5d8-4b1c8aa8ef0e",
+          "modalidade": "1",
+          "palpite": "06,07,14,19",
+          "valor": null,
+          "cercado": "11111000",
+          "invertido": 0
+        },
+        {
+          "id": "fcdd8b85-03a8-4235-bc61-d0e02684ae15",
+          "modalidade": "2",
+          "palpite": "91,76,24,60",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1e02",
+      "dataExtracao": "08/08/2025",
+      "horarioExtracao": "23:38:48",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b897e851-b96c-40be-a2a6-b54b874b7498",
+          "modalidade": "1",
+          "palpite": "01,02,05,04,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "0f278b1b-8d46-4074-ad8a-a1da85fac940",
+          "modalidade": "2",
+          "palpite": "98,12,34",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d206",
+      "dataExtracao": "08/08/2025",
+      "horarioExtracao": "23:46:29",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "c1163322-dd05-438a-985a-c621523af311",
+          "modalidade": "1",
+          "palpite": "01,02,03,04,05",
+          "valor": null,
+          "cercado": "11111000",
+          "invertido": 0
+        },
+        {
+          "id": "ae0c057d-7220-40c0-a5fd-652d3d00cd70",
+          "modalidade": "2",
+          "palpite": "08,91,23,76,54",
+          "valor": null,
+          "cercado": "11111110",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3d59",
+      "dataExtracao": "09/08/2025",
+      "horarioExtracao": "00:08:22",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "5f7d0b3a-b646-40ff-8e1f-5867ce02eac3",
+          "modalidade": "3",
+          "palpite": "801,456,12,543,980,134,567",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2ba9",
+      "dataExtracao": "09/08/2025",
+      "horarioExtracao": "09:24:13",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "c3e45588-ed49-44e5-abc7-fa15def231fb",
+          "modalidade": "3",
+          "palpite": "19,19,15",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "719b",
+      "dataExtracao": "09/08/2025",
+      "horarioExtracao": "09:24:52",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "100321b5-e9fa-436e-9227-a04296af435f",
+          "modalidade": "3",
+          "palpite": "912",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "f29b",
+      "dataExtracao": "11/08/2025",
+      "horarioExtracao": "09:21:44",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 5,
+      "palpites": [
+        {
+          "id": "a1b9e370-0869-4d04-8e8e-e1978e6c3fda",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "230eb7ee-21c2-41de-9a61-68b16914ef6a",
+          "modalidade": "3",
+          "palpite": "91",
+          "valor": 10,
+          "cercado": "11111000",
+          "invertido": 0
+        },
+        {
+          "id": "b2da2628-ac46-4ade-a51a-29184f83d563",
+          "modalidade": "2",
+          "palpite": "89",
+          "valor": 10,
+          "cercado": "11111000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "33eb",
+      "dataExtracao": "11/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 5,
+      "palpites": [
+        {
+          "id": "242906ba-b9fa-4850-a65d-b6ed42813e44",
+          "modalidade": "2",
+          "palpite": "23",
+          "valor": 10,
+          "cercado": "11111000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1d8f",
+      "dataExtracao": "11/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 5,
+      "palpites": [
+        {
+          "id": "877c24cc-c169-4633-b111-6877cead4850",
+          "modalidade": "3",
+          "palpite": "91",
+          "valor": null,
+          "cercado": "11111000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5e14",
+      "dataExtracao": "11/08/2025",
+      "horarioExtracao": "09:35:09",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "974d49c1-a10f-45c1-b940-3d2692f97090",
+          "modalidade": "3",
+          "palpite": "423",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "26ba",
+      "dataExtracao": "11/08/2025",
+      "horarioExtracao": "09:35:25",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a14fac7f-84ef-4ff0-ad5b-8257ced6a46e",
+          "modalidade": "3",
+          "palpite": "423,34",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "be2c",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "08:14:21",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "7d6fa162-2877-466e-a0dc-98624816b51e",
+          "modalidade": "4",
+          "palpite": "2323,0123,8019",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "cce3",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "08:15:07",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "7af6560f-9f47-41c5-b87d-85a828ea11e7",
+          "modalidade": "3",
+          "palpite": "81",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "ab8f",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "08:17:34",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "53d5dca3-6ac1-4b35-bbbe-fd12cd700cc3",
+          "modalidade": "3",
+          "palpite": "81,081",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "10fa",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "08:28:47",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "94b7fffc-57ab-4a28-8ffe-206566b6f7a0",
+          "modalidade": "3",
+          "palpite": "980",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3d0b",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "08:46:29",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "5a8b0a0c-6932-4f07-8d7a-49739acfa538",
+          "modalidade": "5",
+          "palpite": "08,07,06",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2bac",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "09:32:44",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e61ee2a7-bbaf-47bb-9fcc-df76a0739bc3",
+          "modalidade": "6",
+          "palpite": "12",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7190",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "09:45:06",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "31b185ce-f066-40fc-976a-9ad2e98f8dfb",
+          "modalidade": "6",
+          "palpite": "12,66",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3480",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "09:48:05",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "429eba9b-e508-4029-a678-0d39f51c883e",
+          "modalidade": "6",
+          "palpite": "76",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "7de5e184-3468-4b45-9847-b8973dcead1f",
+          "modalidade": "5",
+          "palpite": "14,13,08",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "e83e74a6-65b3-4f15-85f4-fd5c2365bc00",
+          "modalidade": "4",
+          "palpite": "7654",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "badf",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "09:51:55",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b9f6f33a-851e-4088-aba7-faba2011418b",
+          "modalidade": "5",
+          "palpite": "05,04,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2d2d",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "10:16:16",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "6b157bee-e657-453f-89be-7e32759063f3",
+          "modalidade": "7",
+          "palpite": "76,54",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "9aa5",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "10:44:03",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "af050b2f-ecbb-467b-90dd-f487783c42c0",
+          "modalidade": "8",
+          "palpite": "20,19,14",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "6a49",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "10:50:33",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "fecafddf-3a02-400d-aae4-9f90e028ec00",
+          "modalidade": "4",
+          "palpite": "7654",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "b5d0f50c-b5eb-4734-bf23-3b1e893b250c",
+          "modalidade": "4",
+          "palpite": "6345",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "9c2f3fdc-2866-48ee-be71-d8b133decf79",
+          "modalidade": "4",
+          "palpite": "0123",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "8017",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "10:57:39",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e1b86005-2bee-49cc-8829-2d4b6fc32211",
+          "modalidade": "4",
+          "palpite": "7654",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "f6f7",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "12:41:34",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d92ef043-e74c-4f97-8e12-73e267bcc14d",
+          "modalidade": "8",
+          "palpite": "05,04,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "a510",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "13:54:17",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "f54560e2-6e39-4351-9cd5-cd7f3ee7f82d",
+          "modalidade": "9",
+          "palpite": "1111,2223",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d90d",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "13:57:48",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "5304272a-79b4-44ee-aaef-b4232dd97c4b",
+          "modalidade": "5",
+          "palpite": "13,08,09,10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "a7e4",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:02:19",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "7fba60e5-d104-4a57-be95-33a8f10e6652",
+          "modalidade": "5",
+          "palpite": "01,06",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "ed5f",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:02:46",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "704393b2-ccd1-4b8e-9fa1-aa60634e319c",
+          "modalidade": "5",
+          "palpite": "10,09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "9fe7",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:08:41",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "357b6fb9-0cd5-4ca7-8d86-2d94262faffc",
+          "modalidade": "5",
+          "palpite": "01,02,03,04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2261",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:13:43",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "71759aa1-8eb3-44ed-99d1-6243f528d89d",
+          "modalidade": "5",
+          "palpite": "20,19,14",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "e7ee",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:14:19",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "fad14714-6d19-469d-8bfa-3b5dee208e20",
+          "modalidade": "1",
+          "palpite": "01,02,03",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7949",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:15:03",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "22776efd-2406-4fc6-a50d-632b4ad66bab",
+          "modalidade": "1",
+          "palpite": "03,02,01,06",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5f3d",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:15:13",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "22776efd-2406-4fc6-a50d-632b4ad66bab",
+          "modalidade": "1",
+          "palpite": "03,02,01,06",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "c36a",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:17:23",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a420611f-52ef-4267-af7c-26e291ac71cb",
+          "modalidade": "1",
+          "palpite": "14,13,12,11",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "a63a",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:17:55",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d8a5511b-9257-485e-a66d-bab19ccc35ae",
+          "modalidade": "1",
+          "palpite": "13,12,07",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5423",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:19:27",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b12d0323-03f2-4096-9dfa-dc30b3628261",
+          "modalidade": "1",
+          "palpite": "14",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "e6aa",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:19:53",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "07d127bc-9252-41ec-a15e-67764a4fb198",
+          "modalidade": "1",
+          "palpite": "08,07",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "e944",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:23:41",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "2ffef0f2-38e9-407a-93bd-824cf872d038",
+          "modalidade": "5",
+          "palpite": "03,04,09,10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "41a7",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:37:54",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "eefcef0f-c007-4c6e-916f-7628fb119bc6",
+          "modalidade": "1",
+          "palpite": "13,12",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "c4d5",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:42:36",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "f3b81f78-a256-4bf8-a3df-f4522cce1b7e",
+          "modalidade": "1",
+          "palpite": "03,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "68a6",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "1d1aaaf0-9356-45c0-a9fe-377ad795bce9",
+          "modalidade": "1",
+          "palpite": "02,03",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "83c4",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:45:54",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "79b6b7cb-cc27-40ca-8be3-3d04361ea6c3",
+          "modalidade": "1",
+          "palpite": "13,12",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "a995",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "af4257d0-aeb2-4c34-9b5c-8bd1e8db8ba3",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "e12c",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "7cad2183-5dbc-4db6-8a3d-479e34d5f094",
+          "modalidade": "1",
+          "palpite": "02,01",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "9816a06e-0314-4d8d-9342-5618e5348980",
+          "modalidade": "1",
+          "palpite": "03,04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5bf2",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "cd766fdd-66cc-433e-94c9-35d00339c8a5",
+          "modalidade": "1",
+          "palpite": "02,01",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "ca8f4bb4-c813-48e0-90a9-20ae962a9f8a",
+          "modalidade": "1",
+          "palpite": "04,09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2a1b",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "f5c80ded-286f-4f3f-9008-f985ce97daf4",
+          "modalidade": "1",
+          "palpite": "04,03",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "167e56fd-5a41-448c-ad11-1c426d8ae937",
+          "modalidade": "1",
+          "palpite": "03,08",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5e34",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "250a67c1-fa59-42df-a03d-e3202b5a6932",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "6aa9ffe3-fe15-4aa0-8f43-0aa99d0de7a7",
+          "modalidade": "2",
+          "palpite": "43",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "dd7ff594-ac18-45a7-a762-0933a00b63c7",
+          "modalidade": "3",
+          "palpite": "543",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "fcda",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "15:05:11",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "39d5157e-62c0-4e74-a323-b135f0b8ec2a",
+          "modalidade": "1",
+          "palpite": "09,08",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "a16e",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "15:07:51",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a09a3c79-5176-41f2-81f8-12367960f40c",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "b7da",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "15:08:23",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "f52e4d22-59a1-48de-b0ce-64ddbde73d89",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 2,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2e1d",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "15:16:59",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0b380145-ab52-4f83-b70b-b019524805b2",
+          "modalidade": "1",
+          "palpite": "02,01",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "20b3",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "15:17:04",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0b380145-ab52-4f83-b70b-b019524805b2",
+          "modalidade": "1",
+          "palpite": "02,01",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "8b49",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "15:17:58",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0b380145-ab52-4f83-b70b-b019524805b2",
+          "modalidade": "1",
+          "palpite": "02,01",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1b13",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:24:52",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "72c49dc9-fef7-4105-9240-2007eb8e21aa",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4884",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:25:32",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a450d037-a153-4bf1-8b49-a427e8d198a3",
+          "modalidade": "1",
+          "palpite": "06,07",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "a4cd",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:26:50",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a450d037-a153-4bf1-8b49-a427e8d198a3",
+          "modalidade": "1",
+          "palpite": "06,07",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "feca",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:27:19",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d367d1ce-2a24-4f99-850a-2f9774ba03d1",
+          "modalidade": "1",
+          "palpite": "18,17",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3b54",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:28:28",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "8b0c20ef-fed6-4cd7-a8b6-6b80850716d6",
+          "modalidade": "5",
+          "palpite": "02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "c408",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:32:26",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0ea1d2c7-2462-4ecd-bde8-f6c12bdbf351",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0e58",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:33:58",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e6fdd481-7601-4149-85c2-e83caf4a609b",
+          "modalidade": "5",
+          "palpite": "03,08",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "66eb",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:38:45",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "3b63941e-8378-4538-b7cb-08e991f3d115",
+          "modalidade": "5",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "621f",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:39:09",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "eeaed627-c4bf-4185-941a-f0a016bad698",
+          "modalidade": "5",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "09b6",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:41:04",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "bfec6276-d8a1-4776-9b61-143ae332faa5",
+          "modalidade": "5",
+          "palpite": "03,04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4784",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:43:36",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a33b4e2f-b970-439f-a0f4-1f6ae5e64731",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "6931",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:43:52",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d5043c11-fcd3-4ed3-ba88-fd4c63ce5f56",
+          "modalidade": "5",
+          "palpite": "08,07",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0240",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:47:37",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "af39f2e8-569d-4967-88fc-819415a820fa",
+          "modalidade": "1",
+          "palpite": "18,19",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3894",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:48:46",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e96d2085-77e1-4b60-8280-13716f2f72eb",
+          "modalidade": "5",
+          "palpite": "07",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0ad6",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:49:41",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "11900a20-654e-4faa-8374-9e0c7fa68b88",
+          "modalidade": "1",
+          "palpite": "13,12",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4e39",
+      "dataExtracao": "12/08/2025",
+      "horarioExtracao": "16:55:57",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b543aea4-f6ee-4461-ac8a-d961dfabcb7d",
+          "modalidade": "5",
+          "palpite": "07,08",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "b5dd",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "09:48:19",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "5211a854-2b95-4d19-bbf8-ae6d34f0b395",
+          "modalidade": "1",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "c848",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "09:57:05",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "11ce0936-37e8-4e6d-a7aa-cb75650fde2f",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "9db2",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "09:58:15",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "dd3463e9-6648-4e07-ae3a-75d8cba336c0",
+          "modalidade": "5",
+          "palpite": "07,08",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1565",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "09:58:34",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "3547bd37-7c36-46c3-bcb7-87ab6b7ff6b9",
+          "modalidade": "5",
+          "palpite": "14,15",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5f11",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:00:05",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "2b3a4cf2-bbe8-4865-a114-ce543f410fb5",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2458",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:02:32",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b04e4068-238a-4198-ba33-2c6b7365b70b",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "168c",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:03:29",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d73d6145-728e-4c66-919c-2e9f44174f45",
+          "modalidade": "5",
+          "palpite": "13",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4a3f",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:08:21",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "7b401228-c076-47ea-9906-b8da7e62238a",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "fa50",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:08:36",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "c31e385e-4cd1-48c5-a786-4f059d944fa8",
+          "modalidade": "5",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "b39a",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:08:57",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "32f4b3e1-22f0-4c1a-81a9-ea2ac1208151",
+          "modalidade": "5",
+          "palpite": "05,04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7af4",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:09:19",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "ef590ece-422d-445c-8466-15a967fc0a09",
+          "modalidade": "5",
+          "palpite": "05,04,03,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d30d",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:10:33",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d2daf223-dea9-4362-beec-16943c6a5a33",
+          "modalidade": "1",
+          "palpite": "05,04,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "98e9",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:15:33",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "4687fbf2-3e71-4ecf-83d2-cd8b7cf3ca46",
+          "modalidade": "1",
+          "palpite": "08,09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "6d19",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:16:06",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "76f61562-9b38-4352-851b-c26958d07490",
+          "modalidade": "5",
+          "palpite": "08,09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4dbe",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:16:23",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "93cb36e6-bca4-43cf-abf2-e9e81a8fe7d4",
+          "modalidade": "5",
+          "palpite": "03,04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5079",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:16:45",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "124383cb-cfd4-4192-901d-a5322418ba5f",
+          "modalidade": "1",
+          "palpite": "08,09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "f67f",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:21:08",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "04ade8eb-c9e3-41ed-8479-89ea3448f4f0",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0d50",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:21:15",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e9f8a981-fba8-4d1e-b8f8-308288a279ee",
+          "modalidade": "1",
+          "palpite": "13",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "f621",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:24:05",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "5babb6ed-feff-4fbf-b183-9e00f39937aa",
+          "modalidade": "1",
+          "palpite": "19",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "72f0",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:24:32",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "f3daa2e5-9184-412f-8459-450131ebe6ff",
+          "modalidade": "1",
+          "palpite": "04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "106e",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:26:29",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "6c89aac0-4d63-4b82-8df9-ff23cd48632a",
+          "modalidade": "1",
+          "palpite": "15",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3620",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:27:01",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0d4b3478-4b85-4ca7-934f-deceb758f9aa",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "c719",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:37:03",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b98a4230-4e26-4846-815a-77a9802b446d",
+          "modalidade": "5",
+          "palpite": "18",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "205f",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:42:07",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d1161c19-94c2-4082-a919-cdc9cbb7ae90",
+          "modalidade": "1",
+          "palpite": "02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "ead4",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "10:53:22",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "ac4cd80a-fa44-498f-9898-b292608414d9",
+          "modalidade": "1",
+          "palpite": "05,10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "9e9a",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:08:28",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "3c2ddbca-140c-4191-8969-46ffa5f5579e",
+          "modalidade": "1",
+          "palpite": "10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0552",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:08:45",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "3c2ddbca-140c-4191-8969-46ffa5f5579e",
+          "modalidade": "1",
+          "palpite": "10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3ff4",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:09:21",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a875c492-728e-422f-b403-917d44ff5b95",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "5919",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:10:47",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a875c492-728e-422f-b403-917d44ff5b95",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "468f",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:14:13",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "9473aee4-5759-4a74-8194-97a33aabb98d",
+          "modalidade": "1",
+          "palpite": "05,04",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3c7a",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:23:22",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "466bdb86-d35d-4cb7-b913-c3bbe22af033",
+          "modalidade": "1",
+          "palpite": "04,03",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "6be535d7-6bb7-42c0-97ac-83d772f3b678",
+          "modalidade": "1",
+          "palpite": "04,09",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "8a20",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:23:52",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a912ccd5-00ae-47dd-a48a-3a7819ee5ef9",
+          "modalidade": "1",
+          "palpite": "20",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "ffafb09a-92c2-47c3-a0ef-8e035df2f592",
+          "modalidade": "1",
+          "palpite": "08",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "64c0",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:25:17",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "21adae04-6f79-4674-ab0f-d46ebd7b2430",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "d16d4b2b-adc9-4c6f-9c6c-15e78a84243d",
+          "modalidade": "1",
+          "palpite": "09",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "c121e2e9-fc4d-418e-a735-2884bc459628",
+          "modalidade": "1",
+          "palpite": "08",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "fd18",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:26:26",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "4c6cc11b-690b-4d31-adbd-173047e8ae67",
+          "modalidade": "5",
+          "palpite": "08",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "4a4cb7b8-e001-437b-bdde-15dd198bbcaf",
+          "modalidade": "5",
+          "palpite": "09",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0cd6",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:27:19",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d25617ee-0140-44d9-ae46-4fc95f9e5dcf",
+          "modalidade": "5",
+          "palpite": "19",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "e0ec917f-652c-4dd6-b52e-9f6ff8035523",
+          "modalidade": "5",
+          "palpite": "18",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "b05e",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:27:44",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d70cc73b-772c-4a10-b933-525023a9a1c5",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "58f7c94d-184e-487a-9421-79d461d14a15",
+          "modalidade": "1",
+          "palpite": "09",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "6ed1",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:28:49",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "9524a770-0a06-4c80-8079-266c586820cf",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "f5db",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:38:06",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e85c5e14-715a-4abd-9b52-132eb50dd799",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "6456",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:38:40",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "9302b253-45d4-4a76-8024-8ff62c2fb59c",
+          "modalidade": "1",
+          "palpite": "05",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1c22",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:45:38",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "74551bfa-1048-4617-ba05-caa859eada43",
+          "modalidade": "5",
+          "palpite": "13",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "de22",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:46:21",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "74551bfa-1048-4617-ba05-caa859eada43",
+          "modalidade": "5",
+          "palpite": "13",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d969",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:46:38",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "c1bb0d07-afa9-46e7-bc95-d0bd8b4c99d2",
+          "modalidade": "5",
+          "palpite": "13",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "eddd",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:47:51",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "7f2ed8a6-b1ab-46a4-962b-6ff42eb8f6be",
+          "modalidade": "5",
+          "palpite": "20",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "27c0",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:48:16",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "42500ad4-7133-4548-8410-a398b631332f",
+          "modalidade": "5",
+          "palpite": "08",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "92c8",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "11:55:28",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "bffca68e-6772-4d12-b7fe-f237cfc0793c",
+          "modalidade": "5",
+          "palpite": "10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3114",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:03:33",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "073e5f73-545d-4a53-9d39-2b0fb9af881b",
+          "modalidade": "5",
+          "palpite": "10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "9825",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:10:40",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d01aa74a-af7b-4b64-b898-5377d471020b",
+          "modalidade": "5",
+          "palpite": "03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3e75",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:11:09",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "2a66129f-210b-4ef5-ac09-5e10ad226efd",
+          "modalidade": "5",
+          "palpite": "05,04",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "846a442d-c944-4d13-93aa-6613b4f4e9c5",
+          "modalidade": "5",
+          "palpite": "03,02",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "8889",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:11:49",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "36940203-707c-401c-92a9-b985d72a4075",
+          "modalidade": "1",
+          "palpite": "05,10",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1cb1",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:12:46",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d3fb0b74-0481-4695-8792-7ce34d3c8655",
+          "modalidade": "5",
+          "palpite": "14",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1d75",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:13:53",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "2a392d22-2443-4182-bdc1-b96bf10b50fa",
+          "modalidade": "5",
+          "palpite": "09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "f314",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:14:47",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a7f97294-ae38-403e-a82c-f266784bdd7b",
+          "modalidade": "5",
+          "palpite": "10,15",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "4b81",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:15:25",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "36c15b65-42e2-41d3-80b3-48d0d2d04fb4",
+          "modalidade": "5",
+          "palpite": "09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "49e3",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:16:18",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "67016c27-de8d-4dc0-b89e-de4cbe424b2d",
+          "modalidade": "5",
+          "palpite": "17",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "ccb7",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:18:06",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "bcfa3721-28ea-42d4-9865-acb4b4ed333f",
+          "modalidade": "5",
+          "palpite": "03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d543",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:23:47",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "4e83e673-be7b-49bc-8dae-728df03570ec",
+          "modalidade": "5",
+          "palpite": "04",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7fb6",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "726bc4a2-b007-4ecb-aeb2-892ca3370189",
+          "modalidade": "5",
+          "palpite": "04,05",
+          "valor": 1,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "497df123-aaa5-459c-89de-272ba3c8af72",
+          "modalidade": "5",
+          "palpite": "06,01",
+          "valor": 1,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "7ce75f0f-6fd2-4c53-a46c-4cd59b52404e",
+          "modalidade": "1",
+          "palpite": "01,06",
+          "valor": 1,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0667",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "18:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "b7f32368-b268-473a-ada9-cd7bd21ec621",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 1,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "20739759-4f2e-4d0c-974f-ef0731daade0",
+          "modalidade": "2",
+          "palpite": "32",
+          "valor": 1,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "fff13128-641e-432b-a105-f0b9a14bc64a",
+          "modalidade": "5",
+          "palpite": "02",
+          "valor": 1,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "1165",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "18:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "1516cdb1-5706-47cf-b4ec-47b8be5f68c1",
+          "modalidade": "3",
+          "palpite": "321",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "2082",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "18:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "1516cdb1-5706-47cf-b4ec-47b8be5f68c1",
+          "modalidade": "3",
+          "palpite": "321",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "dae8",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:44:40",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "8ae6a944-39a6-4ae9-b6c3-e5fa2677f45f",
+          "modalidade": "3",
+          "palpite": "123",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d53c",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:46:21",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "23482bbc-210d-4734-a186-2bd6485afeff",
+          "modalidade": "3",
+          "palpite": "234",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "e726",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:49:44",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e9f93373-5e82-4095-9a47-d92412b6f44f",
+          "modalidade": "3",
+          "palpite": "543",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 1
+        }
+      ]
+    },
+    {
+      "id": "f521",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:49:59",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "e9f93373-5e82-4095-9a47-d92412b6f44f",
+          "modalidade": "3",
+          "palpite": "543",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 1
+        }
+      ]
+    },
+    {
+      "id": "6427",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:50:12",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "db80dc0e-0284-4eb7-90af-6909dfe987df",
+          "modalidade": "3",
+          "palpite": "543",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d9a7",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:54:24",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "ca439542-8ba0-47b2-80d6-a2d1ba9b6360",
+          "modalidade": "3",
+          "palpite": "345",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 1
+        }
+      ]
+    },
+    {
+      "id": "d196",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:54:35",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "d326604d-f5b8-4f31-99ef-3760bfd522ad",
+          "modalidade": "3",
+          "palpite": "345",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0a88",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:55:21",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "262fdb86-4426-44cd-81d7-79f6a8fd05c1",
+          "modalidade": "4",
+          "palpite": "3456",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 1
+        }
+      ]
+    },
+    {
+      "id": "7540",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:55:35",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "528d2dfe-3120-4161-8345-c4b50cabad48",
+          "modalidade": "4",
+          "palpite": "2543",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7a3a",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:56:28",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "10dd4e3d-c9d0-49ad-be26-99b290d31a65",
+          "modalidade": "9",
+          "palpite": "1234",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 1
+        }
+      ]
+    },
+    {
+      "id": "4f96",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "12:56:41",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "fe4e09e8-6671-4fe3-88d1-fb607d561d3a",
+          "modalidade": "9",
+          "palpite": "2345",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "0400",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "13:19:18",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "affac636-44e2-4a72-829a-e5ef33e708ee",
+          "modalidade": "2",
+          "palpite": "54",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "d2a0",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "ecb2bcb3-76ea-49c7-946b-79760ab30529",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "fcd99623-bff7-44fb-88d6-c60fde4fd1bd",
+          "modalidade": "1",
+          "palpite": "10,09",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7624",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "14:24:09",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "43540c84-0ff7-45b3-9084-6dc6cc672669",
+          "modalidade": "5",
+          "palpite": "08,09",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "98b1",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "16:23:10",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "ea8bafb1-7fc3-4f33-9b96-9e0d97a6dea6",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "4a5989e5-12b8-4eea-b0ce-967c1cba6ed3",
+          "modalidade": "1",
+          "palpite": "01,02",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "470e0f7f-2025-434c-b29c-29b841df081a",
+          "modalidade": "2",
+          "palpite": "34",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "7184",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "16:36:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "462ed6da-8158-444f-b496-cad8a3593f8e",
+          "modalidade": "1",
+          "palpite": "04,05",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        },
+        {
+          "id": "5e65b331-7899-4745-ac8d-8a4bbef03ba6",
+          "modalidade": "2",
+          "palpite": "43",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0
+        }
+      ]
+    },
+    {
+      "id": "3545",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "16:42:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "908367a2-46b2-4065-ae7b-b313ab0c107d",
+          "modalidade": "1",
+          "palpite": "12,13",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "1"
+        },
+        {
+          "id": "e1d97aea-b6b0-48e7-b03e-60660dcd8cc3",
+          "modalidade": "2",
+          "palpite": "34",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "2"
+        }
+      ]
+    },
+    {
+      "id": "2762",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "16:46:56",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "a9df8bba-028d-4740-9ead-6b59aef12a8b",
+          "modalidade": "1",
+          "palpite": "02,03",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "1"
+        },
+        {
+          "id": "7288cb8f-32ed-40ec-b01c-c2ff26e5553b",
+          "modalidade": "2",
+          "palpite": "76",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "2"
+        }
+      ]
+    },
+    {
+      "id": "f936",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "78987287-d3c1-4e0c-843f-7ea28abff445",
+          "modalidade": "1",
+          "palpite": "03,04",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "1"
+        },
+        {
+          "id": "c273d8a5-66f5-4a6b-bc46-b172c347e07b",
+          "modalidade": "2",
+          "palpite": "91",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "2"
+        },
+        {
+          "id": "fe83a61a-827d-4e47-9096-0aa99182b94f",
+          "modalidade": "3",
+          "palpite": "534",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "3"
+        },
+        {
+          "id": "5226ab2c-700a-42f9-8c0c-5e58ac76929b",
+          "modalidade": "4",
+          "palpite": "6543",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "4"
+        },
+        {
+          "id": "0b5760a9-dd97-450f-a65b-e24c7a9fb192",
+          "modalidade": "5",
+          "palpite": "15,14,13",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "5"
+        },
+        {
+          "id": "f8a62235-ca7e-495a-b026-c5aebecb222d",
+          "modalidade": "6",
+          "palpite": "54,32",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "6"
+        },
+        {
+          "id": "07d2a337-282a-45ef-9217-61c5242c383e",
+          "modalidade": "7",
+          "palpite": "76",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "7"
+        },
+        {
+          "id": "95f16570-aebd-4f9f-9d97-df7f6bc3d785",
+          "modalidade": "8",
+          "palpite": "25,20",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "8"
+        },
+        {
+          "id": "dcf59cfb-2dd8-4031-b992-2629be6f3ada",
+          "modalidade": "9",
+          "palpite": "6543",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "9"
+        },
+        {
+          "id": "bcf481d3-8d0b-4a02-b3cd-aba960e58f6a",
+          "modalidade": "10",
+          "palpite": "98",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "10"
+        }
+      ]
+    },
+    {
+      "id": "296b",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "9f3fd889-eca4-4793-99f3-30e7e4a93fc3",
+          "modalidade": "10",
+          "palpite": "12",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "10"
+        },
+        {
+          "id": "748f2484-20f0-4f5a-8484-cba4e8f652c5",
+          "modalidade": "10",
+          "palpite": "43",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "10"
+        },
+        {
+          "id": "6d293a7a-1af8-427f-80b7-8f680e9cf7a0",
+          "modalidade": "7",
+          "palpite": "65",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "7"
+        }
+      ]
+    },
+    {
+      "id": "930d",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "16:57:24",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "222a1ae0-626c-4c46-8b49-8b88e94f1a00",
+          "modalidade": "6",
+          "palpite": "76",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "6"
+        }
+      ]
+    },
+    {
+      "id": "4c16",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "17:00:10",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "277290f9-0490-4109-a43f-0fc219b0c2e9",
+          "modalidade": "9",
+          "palpite": "7654",
+          "valor": null,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "9"
+        }
+      ]
+    },
+    {
+      "id": "e8ea",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "17:00:57",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "3d20697e-5161-4786-bf45-3377810f8c7f",
+          "modalidade": "9",
+          "palpite": "7543",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "9"
+        }
+      ]
+    },
+    {
+      "id": "b272",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "17:02:27",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "0accc737-3ce6-4c76-a68e-0c04760a1b7c",
+          "modalidade": "9",
+          "palpite": "3456",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "9"
+        }
+      ]
+    },
+    {
+      "id": "28b3",
+      "dataExtracao": "13/08/2025",
+      "horarioExtracao": "14:00",
+      "ponto": 12,
+      "usuario": 252,
+      "credito": 0,
+      "palpites": [
+        {
+          "id": "36a8120e-deb0-4fb2-a580-0d74d9a1dd02",
+          "modalidade": "1",
+          "palpite": "03,04",
+          "valor": 5,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "1"
+        },
+        {
+          "id": "046273db-f928-4ad5-8393-7ec0c7471221",
+          "modalidade": "2",
+          "palpite": "34,76",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "2"
+        },
+        {
+          "id": "584081a4-9b8c-4d7e-805c-641e3186cf23",
+          "modalidade": "3",
+          "palpite": "437",
+          "valor": 10,
+          "cercado": "00000000",
+          "invertido": 0,
+          "grupo": "3"
+        }
+      ]
     }
   ],
   "palpites": [],

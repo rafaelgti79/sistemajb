@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback  } from 'react';
 import EscPosEncoder from './utils/EscPosEncoder';
-import { formatarDadosParaEnvio, enviarAposta } from './services/apostas'; // Importando as funções
-import { adicionarExtracao, adicionarPalpiteService,  excluirPalpiteDoServidor } from './services/extracaoService';  // Importando a função de adicionar extração
+//import { formatarDadosParaEnvio, enviarAposta } from './services/apostas'; // Importando as funções
+import { adicionarExtracao, adicionarPalpiteService } from './services/extracaoService';  // Importando a função de adicionar extração
 import CurrencyInput from 'react-currency-input-field';
-
-
-
-
+import QRCode from 'qrcode';
 import './App.css';
+
+
 
 const bichos = [
   'Avestruz', 'Águia', 'Burro', 'Borboleta', 'Cachorro',
@@ -16,6 +15,7 @@ const bichos = [
   'Leão', 'Macaco', 'Porco', 'Pavão', 'Peru',
   'Touro', 'Tigre', 'Urso', 'Veado', 'Vaca'
 ];
+
 
 function App() {
 
@@ -29,17 +29,17 @@ const [printerStatus, setPrinterStatus] = useState('🔌 Procurando impressora..
 const [grupoSelecionado, setGrupoSelecionado] = useState(null);
 const [mostrarCercas, setMostrarCercas] = useState(false);
 const [numerosSelecionados, setNumerosSelecionados] = useState([1]);
-const [cercSelecionado, setCercSelecionado] = useState([1]);
+const [cercSelecionado, setCercSelecionado] = useState([]);
 const [dezenaNumerosSelecionados, setDezenaNumerosSelecionados] = useState([]);
 const [dezenaCercSelecionado, setDezenaCercSelecionado] = useState(null);
 const [centenaNumerosSelecionados, setCentenaNumerosSelecionados] = useState([]);
 const [centenaCercSelecionado, setCentenaCercSelecionado] = useState(null);
-const [centenaInvertido, setCentenaInvertido] = useState(false);
+
 const [milharCercSelecionado, setMilharCercSelecionado] = useState(null);
 const [milharNumerosSelecionados, setMilharNumerosSelecionados] = useState([]);
 const [milharInvertido, setMilharInvertido] = useState(false);
 const [duquePalpites, setDuquePalpites] = useState([]);
-const [duqueDezenaPalpites, setDuqueDezenaPalpites] = useState([]);
+
 const [ternoDezenaPalpites, setTernoDezenaPalpites] = useState([]);
 const [ternoGrupoPalpites, setTernoGrupoPalpites] = useState([]);
 const [mcInvertido, setMcInvertido] = useState(false);
@@ -49,23 +49,48 @@ const [dezenaModalidade, setDezenaModalidade] = useState(null); // pode ser "Ter
 const [dezenaDezenaPalpites, setDezenaDezenaPalpites] = useState([]);
 const [duqueDmePalpites, setDuqueDmePalpites] = useState([]);
 const [ternoDmePalpites, setTernoDmePalpites] = useState([]);
-const [duqueGrupoPalpites, setDuqueGrupoPalpites] = useState([]);
+
+const [grupoPalpites, setGrupoPalpites] = useState([]);
 const [showModal, setShowModal] = useState(false);  // Estado para controlar a visibilidade do modal
 const [finalizarAposta, setFinalizarAposta] = useState(false);  // Estado para controle da finalização da aposta
 const [horarioSelecionado, setHorarioSelecionado] = useState('');
 const [dataSelecionado, setDataSelecionado] = useState('');
+const [ponto, setPonto] = useState(12);  // Exemplo de ponto
+const [usuario, setUsuario] = useState(252); // Exemplo de usuário
+const [palpitesSalvos, setPalpitesSalvos] = useState([]);
+
+const [dezenaPalpites, setDezenaPalpites] = useState([]);
+const [centenaPalpites, setCentenaPalpites] = useState([]);
+const [milharPalpites, setMilharPalpites] = useState([]);
+const [duqueGrupoPalpites, setDuqueGrupoPalpites] = useState([]);
+const [duqueDezenaPalpites, setDuqueDezenaPalpites] = useState([]);
+const [duqueDezenaNumerosSelecionados, setDuqueDezenaNumerosSelecionados] = useState([]);
+const [ternoDezenaNumerosSelecionados, setTernoDezenaNumerosSelecionados] = useState([]); 
+const [milharCentenaPalpites, setMilharCentenaPalpites] = useState([]); 
+const [milharCentenaNumerosSelecionados, setMilharCentenaNumerosSelecionados] = useState([]); 
+const [dezeninhaPalpites, setDezeninhaPalpites] = useState([]); 
+const [dezeninhaNumerosSelecionados, setDezeninhaNumerosSelecionados] = useState([]); 
+const [globalInvertido, setGlobalInvertido] = useState(0);
+
+const [abrindoPorta, setAbrindoPorta] = useState(false);
+const [idImpressoraSalva, setIdImpressoraSalva] = useState(null);
+
+const nomesDosGrupos = {
+  '1': 'Grupo',
+  '2': 'Dezena',
+  '3': 'Centena',
+  '4': 'Milhar',
+  '5': 'Duque de Grupo',
+  '6': 'Duque de Centena',
+  '7': 'Terno de Dezena',
+  '8': 'Terno de Grupo',
+  '9': 'Milhar e Centema',
+  '10': 'Dezeninha',
+  // adicione quantos grupos precisar...
+};
 
 
-
-
-
-
-  const [carregando, setCarregando] = useState(true);
-   const [ponto, setPonto] = useState(12);  // Exemplo de ponto
-  const [usuario, setUsuario] = useState(252); // Exemplo de usuário
-  const [palpitesSalvos, setPalpitesSalvos] = useState([]);
-
-
+/////////////////////INICIO///////////////////
 //Salvar palpites no localStorage sempre que forem atualizados:
 useEffect(() => {
 localStorage.setItem('palpitesSalvos', JSON.stringify(palpitesSalvos));
@@ -79,27 +104,79 @@ setPalpitesSalvos(JSON.parse(dadosSalvos));
 }
 }, []);
 
-
-
 //remover palpite
 const removerPalpite = (id) => {
 const atualizados = palpitesSalvos.filter(p => p.id !== id);
 setPalpitesSalvos(atualizados);
 localStorage.setItem('palpitesSalvos', JSON.stringify(atualizados));
 };
+////////////FIM/////////////////////////
+
+//Somo para os palpites
+const somaTotal = palpitesSalvos.reduce((acc, p) => acc + (p.valor || 0), 0);
 
 
-   // Inicializa a cercaNumero 1 marcada com os números 1, para o primeiro premio
-  useEffect(() => {
-  //setCercSelecionado(1);
-  //setNumerosSelecionados([1]);
-}, []);
+/////////////////////INICIO///////////////////
 
 
+// Converte canvas para ESC/POS (bitmap)
+const converterCanvasParaEscPos = (canvas) => {
+  const ctx = canvas.getContext('2d');
+  const { width, height } = canvas;
+  const imageData = ctx.getImageData(0, 0, width, height);
+  const data = imageData.data;
+
+  const bytesPerLine = Math.ceil(width / 8);
+  const buffer = [];
+
+  for (let y = 0; y < height; y++) {
+    buffer.push(0x1d, 0x76, 0x30, 0x00); // comando GS v 0
+    buffer.push(bytesPerLine % 256, Math.floor(bytesPerLine / 256)); // largura em bytes
+    buffer.push(1, 0); // altura de 1 linha por vez (ajustar se precisar)
+
+    for (let xByte = 0; xByte < bytesPerLine; xByte++) {
+      let byte = 0;
+      for (let bit = 0; bit < 8; bit++) {
+        const x = xByte * 8 + bit;
+        if (x < width) {
+          const idx = (y * width + x) * 4;
+          const pixelOn = data[idx] < 128; // threshold para preto/branco
+          if (pixelOn) byte |= (0x80 >> bit);
+        }
+      }
+      buffer.push(byte);
+    }
+  }
+
+  return new Uint8Array(buffer);
+};
+
+// Gera QR Code e retorna ESC/POS
+const gerarQRCodeBytes = async (text) => {
+  const canvas = document.createElement('canvas');
+  await QRCode.toCanvas(canvas, text, { width: 200 });
+  return converterCanvasParaEscPos(canvas);
+};
+////////////FIM/////////////////////////
+
+
+
+/////////////////////INICIO///////////////////
 const adicionarPalpite = async () => {
  await adicionarPalpiteService({
-    grupoSelecionado,
+    grupoSelecionado,   //Modalidade do grupo ex.. 1 
+    grupoPalpites,
+    dezenaPalpites,
+    centenaPalpites,
+    milharPalpites,
     duqueGrupoPalpites,
+    duqueDezenaPalpites,
+    ternoDezenaPalpites,
+    ternoGrupoPalpites,
+    milharCentenaPalpites,
+    dezeninhaPalpites,
+    globalInvertido,
+   
     valor,
     cercSelecionado,
     palpitesSalvos,
@@ -108,47 +185,194 @@ const adicionarPalpite = async () => {
     setCercSelecionado
   });
   
+  setGrupoPalpites([]);
+  setDezenaPalpites([]);
+  setMilharPalpites([]);
   setDuqueGrupoPalpites([]);
+  setDuqueDezenaPalpites([]);
+  setTernoDezenaPalpites([]);
+  setTernoGrupoPalpites([]);
+  setMilharCentenaPalpites([]);
+  setDezeninhaPalpites([]);
+};
+////////////FIM/////////////////////////
+
+// Função utilitária para verificar se a porta está aberta
+const impressoraEstaAberta = (porta) => {
+  return porta?.readable && porta?.writable;
 };
 
+// Gerar ID único com dados reais da porta
+const gerarIdImpressora = (port) => {
+  const info = port.getInfo();
+  const vendor = info.usbVendorId || 'unknownVendor';
+  const product = info.usbProductId || 'unknownProduct';
+  return `${vendor}-${product}`;
+};
 
+// Seleciona impressora apenas na primeira vez
+const selecionarImpressora = async () => {
+  try {
+    const port = await navigator.serial.requestPort();
+    if (!impressoraEstaAberta(port)) {
+      await port.open({ baudRate: 9600 });
+    }
 
-  //Finalizar a aposta
-  const handleFinalizarAposta = async () => {
+    setPortaSerial(port);
+    setPrinterStatus('✅ Impressora selecionada manualmente');
+
+    // Salva ID único real da impressora
+    const idReal = gerarIdImpressora(port);
+    localStorage.setItem('idImpressoraSalva', idReal);
+
+  } catch (err) {
+    console.warn('❌ Impressora não selecionada:', err);
+    setPrinterStatus('❌ Impressora não selecionada');
+  }
+};
+
+// Conecta automaticamente usando ID salvo
+const conectarImpressoraAutomaticamente = useCallback(async () => {
+  try {
+    const idSalvo = localStorage.getItem('idImpressoraSalva');
+    if (!idSalvo) {
+      setPrinterStatus('⚠️ Nenhuma impressora salva — selecione manualmente');
+      return;
+    }
+
+    const ports = await navigator.serial.getPorts();
+    const portaEncontrada = ports.find(port => gerarIdImpressora(port) === idSalvo);
+
+    if (!portaEncontrada) {
+      setPrinterStatus('❌ Impressora anterior não encontrada');
+      setPortaSerial(null);
+      return;
+    }
+
+    // Só abre se ainda não estiver aberta
+    if (!impressoraEstaAberta(portaEncontrada)) {
+      await portaEncontrada.open({ baudRate: 9600 });
+    }
+
+    setPortaSerial(portaEncontrada);
+    setPrinterStatus('✅ Impressora reconectada automaticamente');
+
+  } catch (err) {
+    console.warn('⚠️ Falha ao reconectar impressora:', err);
+    setPrinterStatus('⚠️ Erro ao conectar automaticamente');
+    setPortaSerial(null);
+  }
+}, []);
+
+// Auto-conectar ao iniciar
+useEffect(() => {
+  conectarImpressoraAutomaticamente();
+}, [conectarImpressoraAutomaticamente]);
+
+// Função de impressão
+// Ajuste na função de impressão para receber 'novaExtracao'
+const imprimirPalpites = async (palpites, novaExtracao) => {
+  if (!impressoraEstaAberta(portaSerial)) {
+    alert("❌ Impressora não conectada");
+    return;
+  }
+
+  try {
+    const writer = portaSerial.writable.getWriter();
+    const encoder = new TextEncoder();
+
+    const dataAtual = new Date();
+    const dataFormatada = dataAtual.toLocaleDateString();
+    const horaFormatada = horarioSelecionado || dataAtual.toLocaleTimeString();
+
+    let texto = "";
+    texto += "***************\n";
+    texto += "   BILHETE\n";
+    texto += "***************\n\n";
+    texto += `Usuário: ${usuario}\n`;
+    texto += `Data: ${dataFormatada}\n`;
+    texto += `Hora: ${horaFormatada}\n\n`;
+
+    // Soma total dos palpites
+    const somaTotal = palpites.reduce((acc, p) => acc + (p.valor || 0), 0);
+    texto += `TOTAL: R$ ${somaTotal.toFixed(2)}\n\n`;
+
+    texto += "Palpites:\n";
+    palpites.forEach((p, i) => {
+      const nomeGrupo = nomesDosGrupos[p.grupo] || `Grupo ${p.grupo}`;
+      texto += `${nomeGrupo} ${p.palpite} -R$:${p.valor.toFixed(2)}\n`;
+    });
+
+    // Envia texto do bilhete
+    await writer.write(encoder.encode(texto));
+
+    // Pequeno espaço antes do QR Code
+    await writer.write(encoder.encode("\n\n"));
+
+    // Gera e envia QR Code
+    const qrBytes = await gerarQRCodeBytes(novaExtracao.id);
+    await writer.write(qrBytes);
+
+    // Mensagem de agradecimento no final
+    await writer.write(encoder.encode("\nObrigado por jogar!\n\n\n"));
+
+    
+    // Finaliza impressão
+    writer.releaseLock();
+
+   // alert("✅ Cupom impresso com sucesso");
+  } catch (error) {
+    console.error("❌ Erro ao imprimir cupom:", error);
+    alert("Erro ao imprimir cupom");
+  }
+};
+
+// Finalizar aposta
+const handleFinalizarAposta = async () => {
   if (!palpitesSalvos.length) {
     alert("Adicione ao menos um palpite antes de finalizar.");
     return;
   }
 
   try {
+    // Se não tiver porta aberta, tenta reconectar
+    if (!impressoraEstaAberta(portaSerial)) {
+      await conectarImpressoraAutomaticamente();
+    }
+
+    // Ainda não conectou? então pede manualmente
+    if (!impressoraEstaAberta(portaSerial)) {
+      await selecionarImpressora();
+    }
+
+    // Adiciona a nova extração e armazena o retorno
     const novaExtracao = await adicionarExtracao({
       ponto,
       usuario,
       credito,
       palpites: palpitesSalvos,
-      horarioSelecionado 
-      
+      horarioSelecionado
     });
 
     console.log('Nova extração adicionada:', novaExtracao);
-    
-    setPalpitesSalvos([]);
-    localStorage.removeItem('palpitesSalvos');
 
-    // Limpa os palpites após envio
+    // Agora passa 'novaExtracao' para imprimir
+    await imprimirPalpites(palpitesSalvos, novaExtracao);
+
     setPalpitesSalvos([]);
-    //setNumerosSelecionados([]);
-    //setCercSelecionado(null);
     setValor('');
+   // alert('Aposta finalizada e impressa com sucesso!');
 
-    alert('Aposta finalizada com sucesso!');
   } catch (error) {
     console.error('Erro ao finalizar aposta:', error);
-    alert('Erro ao enviar aposta. Tente novamente.');
+    alert('Erro ao finalizar aposta ou imprimir. Tente novamente.');
   }
 };
 
+////////////FIM/////////////////////////
 
+
+/////////////////////INICIO///////////////////
 const handleHorarioChange = (event) => {
 setHorarioSelecionado(event.target.value);
 };
@@ -156,18 +380,56 @@ setHorarioSelecionado(event.target.value);
 const handleDataChange = (event) => {
 setDataSelecionado(event.target.value);
 };
+////////////FIM/////////////////////////
 
 
+/////////////////////INICIO///////////////////
   // Função para exibir o modal ao finalizar a aposta
   const handleFinalizar = () => {
     setShowModal(true);  // Exibe o modal quando o botão "Finalizar" for clicado
   };
 
+
   // Função para fechar o modal
   const fecharModal = () => {
     setShowModal(false);
   };
+////////////FIM/////////////////////////
 
+
+
+/////////////////////INICIO///////////////////
+// Cercas Grupo
+const toggleGrupoNumero = (num) => {
+  if (grupoPalpites.includes(num)) {
+    // Se já está incluído, remove
+    setGrupoPalpites(grupoPalpites.filter(n => n !== num));
+  } else {
+    // Se ainda não está incluso, adiciona apenas se tiver menos de 20
+    if (grupoPalpites.length < 20) {
+      setGrupoPalpites([...grupoPalpites, num]);
+    } else {
+      alert("Você só pode selecionar até 20 Grupos.");
+    }
+  }
+};
+
+//--------------------//----------------------//
+
+// Cercas Dezena
+const toggleDezenaNumero = (num) => {
+  if (dezenaNumerosSelecionados.length === 1) {
+    // Já tem 1 dígito → cria dezena
+    const dezena = `${dezenaNumerosSelecionados[0]}${num}`.padStart(2, '0');
+    setDezenaPalpites([...dezenaPalpites, parseInt(dezena, 10)]);
+    setDezenaNumerosSelecionados([]); // limpa para próxima dezena
+  } else {
+    // Escolhendo o primeiro dígito
+    setDezenaNumerosSelecionados([num]);
+  }
+};
+
+//--------------------//----------------------//
 
 // Cercas para Dezena
 const toggleDezenaCerc = (num) => {
@@ -182,17 +444,23 @@ const toggleDezenaCerc = (num) => {
 };
 //--------------------//----------------------//
 
-// Marcar/desmarcar números individualmente (1–7)
-const toggleDezenaNumero = (num) => {
-  if (dezenaNumerosSelecionados.includes(num)) {
-    setDezenaNumerosSelecionados(dezenaNumerosSelecionados.filter(n => n !== num));
-  } else {
-    setDezenaNumerosSelecionados([...dezenaNumerosSelecionados, num]);
-  }
-};
-//--------------------//----------------------//
+
+
 
 // Cercas para Centena
+const toggleCentenaNumero = (num) => {
+  if (centenaNumerosSelecionados.length === 2) {
+    // Já tem 2 dígitos → cria o número com 3 dígitos
+    const numero = `${centenaNumerosSelecionados[0]}${centenaNumerosSelecionados[1]}${num}`.padStart(3, '0');
+    setCentenaPalpites([...centenaPalpites, numero]);
+    setCentenaNumerosSelecionados([]); // limpa para próxima entrada
+  } else {
+    // Adiciona o dígito clicado
+    setCentenaNumerosSelecionados([...centenaNumerosSelecionados, num]);
+  }
+};
+
+
 const toggleCentenaCerc = (num) => {
   if (centenaCercSelecionado === num) {
     setCentenaCercSelecionado(null);
@@ -205,7 +473,19 @@ const toggleCentenaCerc = (num) => {
 };
 //--------------------//----------------------//
 
-// Cercas para Milhar
+// Função para montar o milhar
+const toggleMilharNumero = (num) => {
+  if (milharNumerosSelecionados.length === 3) {
+    // Já tem 3 dígitos → cria o número com 4 dígitos
+    const numero = `${milharNumerosSelecionados[0]}${milharNumerosSelecionados[1]}${milharNumerosSelecionados[2]}${num}`;
+    setMilharPalpites([...milharPalpites, numero.padStart(4, '0')]);
+    setMilharNumerosSelecionados([]); // limpa para próxima entrada
+  } else {
+    // Adiciona o dígito clicado
+    setMilharNumerosSelecionados([...milharNumerosSelecionados, num]);
+  }
+};
+
 const toggleMilharCerc = (num) => {
   if (milharCercSelecionado === num) {
     setMilharCercSelecionado(null);
@@ -229,13 +509,6 @@ const adicionarDuqueGrupoAleatorio = () => {
 };
 //--------------------//----------------------//
 
-/* const toggleDuqueGrupoNumero = (num) => {
-  if (duqueGrupoPalpites.includes(num)) {
-    setDuqueGrupoPalpites(duqueGrupoPalpites.filter(n => n !== num));
-  } else {
-    setDuqueGrupoPalpites([...duqueGrupoPalpites, num]);
-  }
-}; */
 
 const toggleDuqueGrupoNumero = (num) => {
   if (duqueGrupoPalpites.includes(num)) {
@@ -253,23 +526,7 @@ const toggleDuqueGrupoNumero = (num) => {
 
 //--------------------//----------------------//
 
-const toggleMilharNumero = (num) => {
-  if (milharNumerosSelecionados.includes(num)) {
-    setMilharNumerosSelecionados(milharNumerosSelecionados.filter(n => n !== num));
-  } else {
-    setMilharNumerosSelecionados([...milharNumerosSelecionados, num]);
-  }
-};
-//--------------------//----------------------//
 
-// Seleção individual
-const toggleCentenaNumero = (num) => {
-  if (centenaNumerosSelecionados.includes(num)) {
-    setCentenaNumerosSelecionados(centenaNumerosSelecionados.filter(n => n !== num));
-  } else {
-    setCentenaNumerosSelecionados([...centenaNumerosSelecionados, num]);
-  }
-};
 
 const adicionarDuqueDezenaAleatorio = () => {
   if (duqueDezenaPalpites.length >= 10) return;
@@ -281,12 +538,17 @@ const adicionarDuqueDezenaAleatorio = () => {
 //--------------------//----------------------//
 
 const toggleDuqueDezenaNumero = (num) => {
-  if (duqueDezenaPalpites.includes(num)) {
-    setDuqueDezenaPalpites(duqueDezenaPalpites.filter(n => n !== num));
+  if (duqueDezenaNumerosSelecionados.length === 1) {
+    // Já tem 1 dígito → cria o número com 2 dígitos
+    const numero = `${duqueDezenaNumerosSelecionados[0]}${num}`;
+    setDuqueDezenaPalpites([...duqueDezenaPalpites, numero.padStart(2, '0')]);
+    setDuqueDezenaNumerosSelecionados([]); // limpa para próxima entrada
   } else {
-    setDuqueDezenaPalpites([...duqueDezenaPalpites, num]);
+    // Adiciona o dígito clicado
+    setDuqueDezenaNumerosSelecionados([...duqueDezenaNumerosSelecionados, num]);
   }
 };
+
 //--------------------//----------------------//
 
 // Cercas para Duque De Terno de Dezena
@@ -299,12 +561,17 @@ const adicionarTernoDezenaAleatorio = () => {
 };
 
 const toggleTernoDezenaNumero = (num) => {
-  if (ternoDezenaPalpites.includes(num)) {
-    setTernoDezenaPalpites(ternoDezenaPalpites.filter(n => n !== num));
+  if (ternoDezenaNumerosSelecionados.length === 1) {
+    // Já tem 1 dígito → cria o número com 2 dígitos
+    const numero = `${ternoDezenaNumerosSelecionados[0]}${num}`;
+    setTernoDezenaPalpites([...ternoDezenaPalpites, numero.padStart(2, '0')]);
+    setTernoDezenaNumerosSelecionados([]); // limpa para próxima entrada
   } else {
-    setTernoDezenaPalpites([...ternoDezenaPalpites, num]);
+    // Adiciona o dígito clicado
+    setTernoDezenaNumerosSelecionados([...ternoDezenaNumerosSelecionados, num]);
   }
 };
+
 //--------------------//----------------------//
 
 // Cercas para Duque De Terno de Grupo
@@ -318,12 +585,33 @@ const adicionarTernoGrupoAleatorio = () => {
 
 const toggleTernoGrupoNumero = (num) => {
   if (ternoGrupoPalpites.includes(num)) {
+    // Se já está incluído, remove
     setTernoGrupoPalpites(ternoGrupoPalpites.filter(n => n !== num));
   } else {
-    setTernoGrupoPalpites([...ternoGrupoPalpites, num]);
+    // Se ainda não está incluso, adiciona apenas se tiver menos de 20
+    if (duqueGrupoPalpites.length < 20) {
+      setTernoGrupoPalpites([...ternoGrupoPalpites, num]);
+    } else {
+      alert("Você só pode selecionar até 20 Grupos.");
+    }
   }
 };
 //--------------------//----------------------//
+
+
+const toggleMilharCentenaNumero = (num) => {
+  if (milharCentenaNumerosSelecionados.length === 3) {
+    // Já tem 3 dígitos → cria o número com 4 dígitos
+    const numero = `${milharCentenaNumerosSelecionados[0]}${milharCentenaNumerosSelecionados[1]}${milharCentenaNumerosSelecionados[2]}${num}`;
+    setMilharCentenaPalpites([...milharCentenaPalpites, numero.padStart(4, '0')]);
+    setMilharCentenaNumerosSelecionados([]); // limpa para próxima entrada
+  } else {
+    // Adiciona o dígito clicado
+    setMilharCentenaNumerosSelecionados([...milharCentenaNumerosSelecionados, num]);
+  }
+};
+
+
 
 // Cercas para Milhar e Centena
 const toggleMcNumero = (num) => {
@@ -362,49 +650,25 @@ const adicionarDezeninhaAleatorio = () => {
 };
 
 const toggleDezeninhaNumero = (num) => {
-  if (dezenaDezenaPalpites.includes(num)) {
-    setDezenaDezenaPalpites(dezenaDezenaPalpites.filter(n => n !== num));
+  if (dezeninhaNumerosSelecionados.length === 1) {
+    // Já tem 1 dígito → cria dezena
+    const dezena = `${dezeninhaNumerosSelecionados[0]}${num}`.padStart(2, '0');
+    setDezeninhaPalpites([...dezeninhaPalpites, parseInt(dezena, 10)]);
+    setDezeninhaNumerosSelecionados([]); // limpa para próxima dezena
   } else {
-    setDezenaDezenaPalpites([...dezenaDezenaPalpites, num]);
+    // Escolhendo o primeiro dígito
+    setDezeninhaNumerosSelecionados([num]);
   }
 };
 //--------------------//----------------------//
 
-// Cercas para Duque de Dez. DME
-const adicionarDuqueDmeAleatorio = () => {
-  if (duqueDmePalpites.length >= 10) return;
-  const novo = Math.floor(Math.random() * 10);
-  if (!duqueDmePalpites.includes(novo)) {
-    setDuqueDmePalpites([...duqueDmePalpites, novo]);
-  }
-};
+// Função para alternar entre 0 e 1
+  const invertido = () => {
+    setGlobalInvertido(prev => (prev === 0 ? 1 : 0));
+  };
 
-const toggleDuqueDmeNumero = (num) => {
-  if (duqueDmePalpites.includes(num)) {
-    setDuqueDmePalpites(duqueDmePalpites.filter(n => n !== num));
-  } else {
-    setDuqueDmePalpites([...duqueDmePalpites, num]);
-  }
-};
-//--------------------//----------------------//
+///////////////////////////////////FIM//////////////////////////////////////
 
-// Cercas para Terno de Dez. DME
-const adicionarTernoDmeAleatorio = () => {
-  if (ternoDmePalpites.length >= 10) return;
-  const novo = Math.floor(Math.random() * 10);
-  if (!ternoDmePalpites.includes(novo)) {
-    setTernoDmePalpites([...ternoDmePalpites, novo]);
-  }
-};
-
-const toggleTernoDmeNumero = (num) => {
-  if (ternoDmePalpites.includes(num)) {
-    setTernoDmePalpites(ternoDmePalpites.filter(n => n !== num));
-  } else {
-    setTernoDmePalpites([...ternoDmePalpites, num]);
-  }
-};
-//--------------------//----------------------//
 
 
 // ==== INÍCIO DA ALTERAÇÃO: função para alternar cercas =====
@@ -438,7 +702,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 
  
 
-
+//Adiciona Saldo com a letra p.
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key.toLowerCase() === 'p') {
@@ -448,124 +712,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
-
-
-  //Conexão da impressora
-  useEffect(() => {
-    const conectarImpressora = async () => {
-      try {
-        const ports = await navigator.serial.getPorts();
-        if (ports.length === 0) {
-          setPrinterStatus('❌ Nenhuma impressora detectada');
-          return;
-        }
-
-        const port = ports[0];
-
-        if (port.readable || port.writable) {
-          setPortaSerial(port);
-          setPrinterStatus('✅ Impressora já conectada');
-          return;
-        }
-
-        if (!port.opened) {
-          await port.open({ baudRate: 9600 });
-          setPortaSerial(port);
-          setPrinterStatus('✅ Impressora conectada automaticamente');
-        }
-      } catch (err) {
-        console.warn('⚠️ Falha ao abrir porta serial:', err);
-        setPrinterStatus('⚠️ Erro ao conectar automaticamente');
-      }
-    };
-
-    conectarImpressora();
-
-    const interval = setInterval(() => {
-      if (!portaSerial || !portaSerial.readable) {
-        conectarImpressora();
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [portaSerial]);
-
-  const selecionarImpressora = async () => {
-    try {
-      const port = await navigator.serial.requestPort();
-
-      if (!port.opened) {
-        await port.open({ baudRate: 9600 });
-      }
-
-      setPortaSerial(port);
-      setPrinterStatus('✅ Impressora selecionada manualmente');
-    } catch (err) {
-      console.warn('Impressora não selecionada:', err);
-      setPrinterStatus('❌ Impressora não selecionada');
-    }
-  };
-
-
-  const imprimir = async () => {
-    if (historico.length === 0) {
-      alert("Nenhuma aposta para imprimir.");
-      return;
-    }
-  
-    try {
-      let port = portaSerial;
-  
-      if (!port) {
-        const ports = await navigator.serial.getPorts();
-        if (ports.length === 0) {
-          alert('Nenhuma impressora conectada. Clique em "Selecionar Impressora".');
-          return;
-        }
-        port = ports[0];
-        setPortaSerial(port);
-        setPrinterStatus('✅ Impressora conectada automaticamente');
-      }
-  
-      if (!port.readable || !port.writable) {
-        if (!port.opened) {
-          await port.open({ baudRate: 9600 });
-        }
-      }
-  
-     
-  
-      let encoder = new EscPosEncoder();
-  encoder = encoder.initialize().align('center').bold(true).line('🎰 Jogo do Bicho').bold(false);
-  encoder.line(`Créditos atuais: ${credito}`).newline();
-  
-  encoder.line('Histórico de Apostas:');
-  historico.forEach((item, index) => {
-  encoder
-    .line(`Aposta ${index + 1}`)
-    .line(`Grupo: ${item.grupo} - ${bichos[item.grupo]}`)
-    .line(`Valor: ${item.valor}`)
-    //.line(`Sorteado: ${item.resultado} - ${bichos[item.resultado]}`)
-    //.line(item.ganhou ? '✅ Ganhou' : '❌ Perdeu')
-    .newline();
-  });
-  
-  encoder.cut('full');
-  
-  const result = encoder.encode();
-  
-  
-      const writer = port.writable.getWriter();
-      await writer.write(result);
-      writer.releaseLock();
-  
-      alert('🖨️ Impressão enviada com sucesso!');
-    } catch (error) {
-      console.error('Erro na impressão:', error);
-      alert('Erro ao imprimir: ' + error.message);
-    }
-  };
-//---------------------//-----------------------------
+ // ==== FIM DO BLOCO =====
 
 
  
@@ -598,92 +745,79 @@ setNumerosSelecionados([...numerosSelecionados, num]);
   className={`grupo-box ${grupoSelecionado === '1' ? 'selecionado' : ''}`}
   onClick={() => setGrupoSelecionado(grupoSelecionado === '1' ? null : '1')}
   >
+    
   Grupo
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'dezena' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'dezena' ? null : 'dezena')}
+  className={`grupo-box ${grupoSelecionado === '2' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '2' ? null : '2')}
   >
   Dezena
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'centena' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'centena' ? null : 'centena')}
+  className={`grupo-box ${grupoSelecionado === '3' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '3' ? null : '3')}
   >
   Centena
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'milhar' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'milhar' ? null : 'milhar')}
+  className={`grupo-box ${grupoSelecionado === '4' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '4' ? null : '4')}
   >
   Milhar
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'duque de grupo' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'duque de grupo' ? null : 'duque de grupo')}
+  className={`grupo-box ${grupoSelecionado === '5' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '5' ? null : '5')}
   >
   Duque de Grupo
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'duque de dezena' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'duque de dezena' ? null : 'duque de dezena')}
+  className={`grupo-box ${grupoSelecionado === '6' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '6' ? null : '6')}
   >
   Duque de Dezena
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'terno de dezena' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'terno de dezena' ? null : 'terno de dezena')}
+  className={`grupo-box ${grupoSelecionado === '7' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '7' ? null : '7')}
   >
   Terno de Dezena
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'terno de grupo' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'terno de grupo' ? null : 'terno de grupo')}
+  className={`grupo-box ${grupoSelecionado === '8' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '8' ? null : '8')}
   >
   Terno de Grupo
   </div>
 
   <div
-  className={`grupo-box ${grupoSelecionado === 'milhar e centena' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'milhar e centena' ? null : 'milhar e centena')}
+  className={`grupo-box ${grupoSelecionado === '9' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '9' ? null : '9')}
   >
   Milhar e Centena
   </div>
   
   <div
-  className={`grupo-box ${grupoSelecionado === 'dezeninha' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'dezeninha' ? null : 'dezeninha')}
+  className={`grupo-box ${grupoSelecionado === '10' ? 'selecionado' : ''}`}
+  onClick={() => setGrupoSelecionado(grupoSelecionado === '10' ? null : '10')}
   >
   Dezeninha
   </div>
   
-  <div
-  className={`grupo-box ${grupoSelecionado === 'duque de dez. dme' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'duque de dez. dme' ? null : 'duque de dez. dme')}
-  >
-  Duque de Dez. DME
-  </div>
-  
- <div
-  className={`grupo-box ${grupoSelecionado === 'terno de dez. dme' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === 'terno de dez. dme' ? null : 'terno de dez. dme')}
-  >
-  Terno de Dez.DME
-  </div>
-  
+    
 
 </div>
 
-  {/* ==== INÍCIO DA ALTERAÇÃO: mostrar cercas e números só se Grupo estiver selecionado ==== */}
-     <div className="cercamento-reservado">
-
+{/* ==== INÍCIO DA ALTERAÇÃO: mostrar cercas e números só se Grupo estiver selecionado ==== */}
+<div className="cercamento-reservado">
    
   {/* /Renderize os elementos do Grupo 1 */}   
   {grupoSelecionado === '1' && (
@@ -727,11 +861,11 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       {Array.from({ length: 25 }, (_, i) => i + 1).map(num => (
         <div
           key={`duque-grupo-${num}`}
-          className={`numero-box ${duqueGrupoPalpites.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleDuqueGrupoNumero(num)}
+          className={`numero-box ${grupoPalpites.includes(num) ? 'selecionado' : ''}`}
+          onClick={() => toggleGrupoNumero(num)}
           style={{
             cursor: 'pointer',
-            backgroundColor: duqueGrupoPalpites.includes(num) ? '#3399ff' : '#4CAF50',
+            backgroundColor: grupoPalpites.includes(num) ? '#3399ff' : '#4CAF50',
             color: 'white',
             fontWeight: 'bold'
           }}
@@ -744,14 +878,16 @@ setNumerosSelecionados([...numerosSelecionados, num]);
   )}
 
   {/* /Renderize os elementos da Dezena 2 */}
-  {grupoSelecionado === 'dezena' && (
+  {grupoSelecionado === '2' && (
   <div className="cercamento-reservado">
+
+    {/* Cercas */}
     <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center' }}>
       {[5, 6, 7].map(num => (
         <div
           key={`dezena-cerc-${num}`}
-          className={`cerca-box ${dezenaCercSelecionado === num ? 'selecionado' : ''}`}
-          onClick={() => toggleDezenaCerc(num)}
+          className={`cerca-box ${cercSelecionado === num ? 'selecionado' : ''}`}
+          onClick={() => toggleCerc(num)}
           style={{ cursor: 'pointer', margin: '0 10px' }}
         >
           Cerc.{num}
@@ -760,27 +896,73 @@ setNumerosSelecionados([...numerosSelecionados, num]);
     </div>
 
     <div className="numeros-grid" style={{ marginTop: '10px', justifyContent: 'center' }}>
-      {Array.from({ length: 7 }, (_, i) => i + 1).map(num => (
+        {Array.from({ length: 7 }, (_, i) => i + 1).map(num => (
+          <div
+            key={num}
+            className={`numero-box ${numerosSelecionados.includes(num) ? 'selecionado' : ''}`}
+            onClick={() => toggleNumero(num)}
+            style={{ cursor: 'pointer', margin: '0 5px' }}
+          >
+            {num}
+          </div>
+        ))}
+
+      </div>
+       
+
+
+
+    <div style={{ margin: '10px 0', textAlign: 'center' }}>
+      
+       {/* Palpites adicionados */}
+      {dezenaPalpites.map((num, idx) => (
         <div
-          key={`dezena-numero-${num}`}
-          className={`numero-box ${dezenaNumerosSelecionados.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleDezenaNumero(num)}
-          style={{ cursor: 'pointer', margin: '0 5px' }}
+          key={`dezena-palpite-${idx}`}
+          className="cerca-box"
+          style={{ backgroundColor: '#3399ff', color: 'white' }}
         >
           {num}
         </div>
       ))}
     </div>
+
+    {/* Números 0 a 9 */}
+    <div className="numeros-grid" style={{ justifyContent: 'center' }}>
+      {Array.from({ length: 10 }, (_, i) => i).map(num => (
+        <div
+          key={`digito-${num}`}
+          className="numero-box"
+          onClick={() => toggleDezenaNumero(num)}
+          style={{
+            cursor: 'pointer',
+            margin: '0 5px',
+            backgroundColor: dezenaNumerosSelecionados.includes(num) ? '#3399ff' : '#4CAF50',
+            color: 'white',
+            fontWeight: 'bold'
+          }}
+        >
+          {num.toString().padStart(1, '0')}
+        </div>
+      ))}
+    </div>
+
+    {/* Mostrar dezenas formadas */}
+    <div style={{ marginTop: '15px', textAlign: 'center' }}>
+      <strong>Dezenas formadas:</strong> {dezenaPalpites.map(d => d.toString().padStart(2, '0')).join(', ')}
+    </div>
+
+    
   </div>
 )}
 
+
 {/* /Renderize os elementos da Centena 3 */}
-{grupoSelecionado === 'centena' && (
+{grupoSelecionado === '3' && (
   <div className="cercamento-reservado">
     <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
       <div
-        className={`cerca-box ${centenaInvertido ? 'selecionado' : ''}`}
-        onClick={() => setCentenaInvertido(!centenaInvertido)}
+        className={`cerca-box ${globalInvertido === 1 ? 'selecionado' : ''}`}
+        onClick={invertido}
         style={{ cursor: 'pointer', margin: '0 10px' }}
       >
         Invertido
@@ -788,9 +970,9 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 
       {[5, 6, 7].map(num => (
         <div
-          key={`centena-cerc-${num}`}
-          className={`cerca-box ${centenaCercSelecionado === num ? 'selecionado' : ''}`}
-          onClick={() => toggleCentenaCerc(num)}
+          key={`dezena-cerc-${num}`}
+          className={`cerca-box ${cercSelecionado === num ? 'selecionado' : ''}`}
+          onClick={() => toggleCerc(num)}
           style={{ cursor: 'pointer', margin: '0 10px' }}
         >
           Cerc.{num}
@@ -799,35 +981,66 @@ setNumerosSelecionados([...numerosSelecionados, num]);
     </div>
 
     <div className="numeros-grid" style={{ marginTop: '10px', justifyContent: 'center' }}>
-      {Array.from({ length: 7 }, (_, i) => i + 1).map(num => (
+        {Array.from({ length: 7 }, (_, i) => i + 1).map(num => (
+          <div
+            key={num}
+            className={`numero-box ${numerosSelecionados.includes(num) ? 'selecionado' : ''}`}
+            onClick={() => toggleNumero(num)}
+            style={{ cursor: 'pointer', margin: '0 5px' }}
+          >
+            {num}
+          </div>
+        ))}
+      </div>
+      
+      <div style={{ margin: '10px 0', textAlign: 'center' }}>
+      <strong>Dígitos selecionados:</strong> {centenaNumerosSelecionados.join('')}
+    </div>
+
+    {/* Números 0 a 9 */}
+    <div className="numeros-grid" style={{ justifyContent: 'center' }}>
+      {Array.from({ length: 10 }, (_, i) => i).map(num => (
         <div
-          key={`centena-numero-${num}`}
-          className={`numero-box ${centenaNumerosSelecionados.includes(num) ? 'selecionado' : ''}`}
+          key={`digito-${num}`}
+          className="numero-box"
           onClick={() => toggleCentenaNumero(num)}
-          style={{ cursor: 'pointer', margin: '0 5px' }}
+          style={{
+            cursor: 'pointer',
+            margin: '0 5px',
+            backgroundColor: centenaNumerosSelecionados.includes(num) ? '#3399ff' : '#4CAF50',
+            color: 'white',
+            fontWeight: 'bold'
+          }}
         >
-          {num}
+          {num.toString().padStart(1, '0')}
         </div>
       ))}
     </div>
+
+    {/* Mostrar dezenas formadas */}
+    <div style={{ marginTop: '15px', textAlign: 'center' }}>
+      <strong>Dezenas formadas:</strong> {centenaPalpites.map(d => d.toString().padStart(3, "0")).join(',')}
+    </div>
+
+
   </div>
 )}
 
 {/* /Renderize os elementos da Milhar 4 */}
-{grupoSelecionado === 'milhar' && (
+{grupoSelecionado === '4' && (
   <div className="cercamento-reservado">
     <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
       <div
-        className={`cerca-box ${milharInvertido ? 'selecionado' : ''}`}
-        onClick={() => setMilharInvertido(!milharInvertido)}
+        className={`cerca-box ${globalInvertido === 1 ? 'selecionado' : ''}`}
+        onClick={invertido}
         style={{ cursor: 'pointer', margin: '0 10px' }}
       >
         Invertido
       </div>
 
       <div
-        className={`cerca-box ${milharCercSelecionado === 5 ? 'selecionado' : ''}`}
-        onClick={() => toggleMilharCerc(5)}
+        className={`cerca-box ${cercSelecionado === 5 ? 'selecionado' : ''}`}
+        onClick={() => toggleCerc(5)}
         style={{ cursor: 'pointer', margin: '0 10px' }}
       >
         Cerc.5
@@ -838,19 +1051,57 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       {Array.from({ length: 5 }, (_, i) => i + 1).map(num => (
         <div
           key={`milhar-numero-${num}`}
-          className={`numero-box ${milharNumerosSelecionados.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleMilharNumero(num)}
+          className={`numero-box ${numerosSelecionados.includes(num) ? 'selecionado' : ''}`}
+          onClick={() => toggleNumero(num)}
           style={{ cursor: 'pointer', margin: '0 5px' }}
         >
           {num}
         </div>
       ))}
     </div>
+
+    {/* Palpites adicionados */}
+      {milharPalpites.map((num, idx) => (
+        <div
+          key={`dezena-palpite-${idx}`}
+          className="cerca-box"
+          style={{ backgroundColor: '#3399ff', color: 'white' }}
+        >
+          {num}
+        </div>
+      ))}
+
+    
+{/* Números 0 a 9 */}
+<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+  {Array.from({ length: 10 }, (_, i) => i).map(num => (
+    <div
+      key={`digito-milhar-${num}`}
+      className="numero-box"
+      onClick={() => toggleMilharNumero(num)}
+      style={{
+        cursor: 'pointer',
+        margin: '0 5px',
+        backgroundColor: milharNumerosSelecionados.includes(num) ? '#3399ff' : '#4CAF50',
+        color: 'white',
+        fontWeight: 'bold'
+      }}
+    >
+      {num}
+    </div>
+  ))}
+</div>
+
+{/* Mostrar milhares formados */}
+<div style={{ marginTop: '15px', textAlign: 'center' }}>
+  <strong>Milhares formados:</strong> {milharPalpites.join(',')}
+</div>
+
   </div>
 )}
 
 {/* /Renderize os elementos da Duque de Grupo 5 */}
-{grupoSelecionado === 'duque de grupo' && (
+{grupoSelecionado === '5' && (
   <div style={{ marginTop: '20px', textAlign: 'center' }}>
     <h3>Meus palpites</h3>
 
@@ -902,7 +1153,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 )}
 
 {/* /Renderize os elementos da Duque de Dezena 6*/}
-{grupoSelecionado === 'duque de dezena' && (
+{grupoSelecionado === '6' && (
   <div style={{ marginTop: '20px', textAlign: 'center' }}>
     <h3>Meus palpites</h3>
 
@@ -928,37 +1179,32 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       ))}
     </div>
 
-    {/* Números de 0 a 9 */}
+    {/* Números 0 a 9 */}
+<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+  {Array.from({ length: 10 }, (_, i) => i).map(num => (
     <div
-      className="numeros-grid"
+      key={`digito-milhar-${num}`}
+      className="numero-box"
+      onClick={() => toggleDuqueDezenaNumero(num)}
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 50px)',
-        gap: '8px',
-        justifyContent: 'center'
+        
+        cursor: 'pointer',
+        margin: '0 5px',
+        backgroundColor: duqueDezenaNumerosSelecionados.includes(num) ? '#3399ff' : '#4CAF50',
+        color: 'white',
+        fontWeight: 'bold'
       }}
     >
-      {Array.from({ length: 10 }, (_, i) => i).map(num => (
-        <div
-          key={`duque-dezena-${num}`}
-          className={`numero-box ${duqueDezenaPalpites.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleDuqueDezenaNumero(num)}
-          style={{
-            cursor: 'pointer',
-            backgroundColor: duqueDezenaPalpites.includes(num) ? '#3399ff' : '#4CAF50',
-            color: 'white',
-            fontWeight: 'bold'
-          }}
-        >
-          {num}
-        </div>
-      ))}
+      {num}
     </div>
-  </div>
+  ))}
+</div>
+
+</div>
 )}
 
 {/* /Renderize os elementos da Terno de Dezena 7 */}
-{grupoSelecionado === 'terno de dezena' && (
+{grupoSelecionado === '7' && (
   <div style={{ marginTop: '20px', textAlign: 'center' }}>
     <h3>Meus palpites</h3>
 
@@ -967,7 +1213,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       <div
         className="cerca-box"
         style={{ cursor: 'pointer', backgroundColor: '#ccc', fontWeight: 'bold' }}
-        onClick={adicionarTernoDezenaAleatorio}
+        onClick={adicionarDuqueDezenaAleatorio}
       >
         +
       </div>
@@ -975,7 +1221,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       {/* Palpites adicionados */}
       {ternoDezenaPalpites.map((num, idx) => (
         <div
-          key={`terno-dezena-palpite-${idx}`}
+          key={`dezena-palpite-${idx}`}
           className="cerca-box"
           style={{ backgroundColor: '#3399ff', color: 'white' }}
         >
@@ -984,37 +1230,32 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       ))}
     </div>
 
-    {/* Números de 0 a 9 */}
+    {/* Números 0 a 9 */}
+<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+  {Array.from({ length: 10 }, (_, i) => i).map(num => (
     <div
-      className="numeros-grid"
+      key={`digito-milhar-${num}`}
+      className="numero-box"
+      onClick={() => toggleTernoDezenaNumero(num)}
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 50px)',
-        gap: '8px',
-        justifyContent: 'center'
+        
+        cursor: 'pointer',
+        margin: '0 5px',
+        backgroundColor: ternoDezenaNumerosSelecionados.includes(num) ? '#3399ff' : '#4CAF50',
+        color: 'white',
+        fontWeight: 'bold'
       }}
     >
-      {Array.from({ length: 10 }, (_, i) => i).map(num => (
-        <div
-          key={`terno-dezena-${num}`}
-          className={`numero-box ${ternoDezenaPalpites.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleTernoDezenaNumero(num)}
-          style={{
-            cursor: 'pointer',
-            backgroundColor: ternoDezenaPalpites.includes(num) ? '#3399ff' : '#4CAF50',
-            color: 'white',
-            fontWeight: 'bold'
-          }}
-        >
-          {num}
-        </div>
-      ))}
+      {num}
     </div>
-  </div>
+  ))}
+</div>
+
+</div>
 )}
 
 {/* /Renderize os elementos da Terno de Grupo 8 */}
-{grupoSelecionado === 'terno de grupo' && (
+{grupoSelecionado === '8' && (
   <div style={{ marginTop: '20px', textAlign: 'center' }}>
     <h3>Meus palpites</h3>
 
@@ -1070,46 +1311,81 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 )}
 
 {/* /Renderize os elementos da Milhar e Centena 9 */}
-{grupoSelecionado === 'milhar e centena' && (
-  <div className="cercamento-reservado" style={{ marginTop: '20px' }}>
-    <div className="cercas-grid" style={{ justifyContent: 'center', alignItems: 'center' }}>
+{grupoSelecionado === '9' && (
+  <div className="cercamento-reservado">
+    <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
       <div
-        className={`cerca-box ${mcInvertido ? 'selecionado' : ''}`}
-        onClick={() => setMcInvertido(!mcInvertido)}
-        style={{ marginRight: '15px' }}
+        className={`cerca-box ${globalInvertido === 1 ? 'selecionado' : ''}`}
+        onClick={invertido}
+        style={{ cursor: 'pointer', margin: '0 10px' }}
       >
         Invertido
       </div>
 
-      {[5, 12].map((num) => (
-        <div
-          key={num}
-          className={`cerca-box ${mcCercSelecionado === num ? 'selecionado' : ''}`}
-          onClick={() => toggleMcCerc(num)}
-          style={{ margin: '0 8px', cursor: 'pointer' }}
-        >
-          Cerc.{num}
-        </div>
-      ))}
+      <div
+        className={`cerca-box ${cercSelecionado === 5 ? 'selecionado' : ''}`}
+        onClick={() => toggleCerc(5)}
+        style={{ cursor: 'pointer', margin: '0 10px' }}
+      >
+        Cerc.5
+      </div>
     </div>
 
     <div className="numeros-grid" style={{ marginTop: '10px', justifyContent: 'center' }}>
-      {Array.from({ length: 7 }, (_, i) => i + 1).map((num) => (
+      {Array.from({ length: 5 }, (_, i) => i + 1).map(num => (
         <div
-          key={num}
-          className={`numero-box ${mcNumerosSelecionados.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleMcNumero(num)}
+          key={`milhar-numero-${num}`}
+          className={`numero-box ${numerosSelecionados.includes(num) ? 'selecionado' : ''}`}
+          onClick={() => toggleNumero(num)}
           style={{ cursor: 'pointer', margin: '0 5px' }}
         >
           {num}
         </div>
       ))}
     </div>
+
+    {/* Palpites adicionados */}
+      {milharCentenaPalpites.map((num, idx) => (
+        <div
+          key={`dezena-palpite-${idx}`}
+          className="cerca-box"
+          style={{ backgroundColor: '#3399ff', color: 'white' }}
+        >
+          {num}
+        </div>
+      ))}
+
+    
+{/* Números 0 a 9 */}
+<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+  {Array.from({ length: 10 }, (_, i) => i).map(num => (
+    <div
+      key={`digito-milhar-${num}`}
+      className="numero-box"
+      onClick={() => toggleMilharCentenaNumero(num)}
+      style={{
+        cursor: 'pointer',
+        margin: '0 5px',
+        backgroundColor: milharCentenaNumerosSelecionados.includes(num) ? '#3399ff' : '#4CAF50',
+        color: 'white',
+        fontWeight: 'bold'
+      }}
+    >
+      {num}
+    </div>
+  ))}
+</div>
+
+{/* Mostrar milhares formados */}
+<div style={{ marginTop: '15px', textAlign: 'center' }}>
+  <strong>Milhares formados:</strong> {milharCentenaPalpites.join(',')}
+</div>
+
   </div>
 )}
 
 {/* /Renderize os elementos da Dezeninha 10 */}
-{grupoSelecionado === 'dezeninha' && (
+{grupoSelecionado === '10' && (
   <div style={{ marginTop: '20px', textAlign: 'center' }}>
     {/* Botões de modalidade */}
     <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '12px' }}>
@@ -1134,7 +1410,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       >
         +
       </div>
-      {dezenaDezenaPalpites.map((num, idx) => (
+      {dezeninhaPalpites.map((num, idx) => (
         <div
           key={`dezena-palpite-${idx}`}
           className="cerca-box"
@@ -1157,7 +1433,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       {Array.from({ length: 10 }, (_, i) => i).map(num => (
         <div
           key={`dezena-${num}`}
-          className={`numero-box ${dezenaDezenaPalpites.includes(num) ? 'selecionado' : ''}`}
+          className={`numero-box ${dezeninhaPalpites.includes(num) ? 'selecionado' : ''}`}
           onClick={() => toggleDezeninhaNumero(num)}
           style={{
             cursor: 'pointer',
@@ -1173,109 +1449,6 @@ setNumerosSelecionados([...numerosSelecionados, num]);
   </div>
 )}
 
-{/* /Renderize os elementos da Duque de Dez. DME 11*/}
-{grupoSelecionado === 'duque de dez. dme' && (
-  <div style={{ marginTop: '20px', textAlign: 'center' }}>
-    <h3>Meus palpites</h3>
-
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '10px' }}>
-      <div
-        className="cerca-box"
-        style={{ cursor: 'pointer', backgroundColor: '#ccc', fontWeight: 'bold' }}
-        onClick={adicionarDuqueDmeAleatorio}
-      >
-        +
-      </div>
-      {duqueDmePalpites.map((num, idx) => (
-        <div
-          key={`dme-palpite-${idx}`}
-          className="cerca-box"
-          style={{ backgroundColor: '#3399ff', color: 'white' }}
-        >
-          {num}
-        </div>
-      ))}
-    </div>
-
-    <div
-      className="numeros-grid"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 50px)',
-        gap: '8px',
-        justifyContent: 'center'
-      }}
-    >
-      {Array.from({ length: 10 }, (_, i) => i).map(num => (
-        <div
-          key={`duque-dme-${num}`}
-          className={`numero-box ${duqueDmePalpites.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleDuqueDmeNumero(num)}
-          style={{
-            cursor: 'pointer',
-            backgroundColor: duqueDmePalpites.includes(num) ? '#3399ff' : '#4CAF50',
-            color: 'white',
-            fontWeight: 'bold'
-          }}
-        >
-          {num}
-        </div>
-      ))}
-    </div>
-  </div>
-)}
-
-{/* /Renderize os elementos da Terno de Dez. DME 12*/}
-{grupoSelecionado === 'terno de dez. dme' && (
-  <div style={{ marginTop: '20px', textAlign: 'center' }}>
-    <h3>Meus palpites</h3>
-
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '10px' }}>
-      <div
-        className="cerca-box"
-        style={{ cursor: 'pointer', backgroundColor: '#ccc', fontWeight: 'bold' }}
-        onClick={adicionarTernoDmeAleatorio}
-      >
-        +
-      </div>
-      {ternoDmePalpites.map((num, idx) => (
-        <div
-          key={`terno-dme-palpite-${idx}`}
-          className="cerca-box"
-          style={{ backgroundColor: '#3399ff', color: 'white' }}
-        >
-          {num}
-        </div>
-      ))}
-    </div>
-
-    <div
-      className="numeros-grid"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 50px)',
-        gap: '8px',
-        justifyContent: 'center'
-      }}
-    >
-      {Array.from({ length: 10 }, (_, i) => i).map(num => (
-        <div
-          key={`terno-dme-${num}`}
-          className={`numero-box ${ternoDmePalpites.includes(num) ? 'selecionado' : ''}`}
-          onClick={() => toggleTernoDmeNumero(num)}
-          style={{
-            cursor: 'pointer',
-            backgroundColor: ternoDmePalpites.includes(num) ? '#3399ff' : '#4CAF50',
-            color: 'white',
-            fontWeight: 'bold'
-          }}
-        >
-          {num}
-        </div>
-      ))}
-    </div>
-  </div>
-)}
 
 
  {/* Botão para finalizar a aposta */}
@@ -1292,7 +1465,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 />
 
       <button 
-        onClick={handleFinalizarAposta} 
+        onClick={handleFinalizar}
         style={{
           padding: '10px 20px', 
           backgroundColor: '#4CAF50', 
@@ -1308,31 +1481,39 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       <button onClick={adicionarPalpite}>Adicionar Palpite</button>
 
       
+      
       {/* Aqui começa o modal */}
       {showModal && (
-        <div style={modalOverlayStyle}>
+        
+      <div style={modalOverlayStyle}>
           <div style={modalStyle}>
             <h2>Resumo da Aposta</h2>
             <div>
-              <p><strong>Grupo Selecionado:</strong> {grupoSelecionado}</p>
-              <p><strong>Números Selecionados:</strong> {numerosSelecionados.join(', ')}</p>
+              <p><strong>DATA:</strong> {dataSelecionado}</p>
+              <p><strong>HORÁRIO:</strong> {horarioSelecionado}</p>
+              <p><strong>PALPITES:</strong></p>
+              <ul>
+                {palpitesSalvos.map((p, i) => (
+                  <li key={i}>
+                    {nomesDosGrupos[p.grupo] || `Grupo ${p.grupo}`} - {p.palpite} - R$ {p.valor.toFixed(2)} 
+                  </li>
+                ))}
+              </ul>
+              <p><strong>TOTAL:</strong> R$ {somaTotal.toFixed(2)}</p>
             </div>
-
-            
-            <button 
-              onClick={() => { 
-                // Lógica de pagamento ou envio da aposta
+            <button
+              onClick={() => {
                 alert('Aposta finalizada com sucesso!');
-                fecharModal();
-              }} 
+                setShowModal(false);
+                handleFinalizarAposta();
+                setPalpitesSalvos([]);
+              }}
               style={confirmButtonStyle}
             >
               Confirmar Aposta
             </button>
-
-
-            <button 
-              onClick={fecharModal} 
+            <button
+              onClick={() => setShowModal(false)}
               style={cancelButtonStyle}
             >
               Cancelar
@@ -1344,20 +1525,20 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 </div>
 
       
-      {/* <div>
-        <button onClick={imprimir}>🖨️ Imprimir Aposta</button>
+       { <div>
+        
         <button onClick={selecionarImpressora}>🔌 Selecionar Impressora</button>
-      </div>
+      </div> }
 
       <p style={{ marginTop: '10px', fontWeight: 'bold' }}>{printerStatus}</p>
 
-      {mensagem && <p className="mensagem">{mensagem}</p>} */}
+      {mensagem && <p className="mensagem">{mensagem}</p>} 
 <div>
   <h3>Palpites Salvos</h3>
   <ul>
     {palpitesSalvos.map(p => (
   <div key={p.id}>
-    <span>{p.modalidade} - {p.palpite} - R$ {p.valor}</span>
+    <span>{nomesDosGrupos[p.grupo] || `Grupo ${p.grupo}`} - {p.palpite} - R$ {p.valor}</span>
     <button onClick={() => removerPalpite(p.id)}>Excluir</button>
   </div>
 ))}
