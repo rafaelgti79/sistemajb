@@ -176,13 +176,25 @@ button:hover {
   color: #0f0f0f;
 }
 
+.grupo-box.selecionado {
+  background-color: #4caf50; /* cor quando selecionado */
+  color: #0c0b0b;
+}
+
+.grupo-box.desabilitado {
+  background-color: #dcdcdc; /* cinza claro */
+  color: #888;
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
 .grupo-box:hover {
   background-color: #e0e0e0;
 }
 
 .grupo-box.selecionado {
   background-color: #007bff;
-  color: white;
+  color: rgb(14, 11, 11);
   border-color: #0056b3;
 }
 
@@ -254,7 +266,10 @@ button:hover {
 .topo-container {
   position: relative;
   width: 100%;
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente o conteúdo */
+  align-items: center;
+  margin-bottom: 0.5rem; /* Espaço controlado abaixo do topo */
 }
 
 /* Título centralizado no container */
@@ -267,10 +282,27 @@ button:hover {
 
 /* Saldo no canto superior direito */
 
+/* Saldo no canto superior direito */
 .saldo-box {
-  position: fixed; /* 🔧 Agora fica fixo na tela */
-  top: 10px;       /* Distância do topo da janela */
-  right: 350px;     /* Distância da lateral direita */
+  position: fixed;
+  top: 10px;
+  right: 540px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 23px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #0f0f0f;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+  
+}
+/* Crédito logo abaixo do saldo */
+.credito-box {
+  position: fixed;
+  top: 60px; /* ajusta abaixo do saldo, que está em top: 10px */
+  right: 540px;
   background-color: rgba(255, 255, 255, 0.85);
   border: 2px solid #ccc;
   border-radius: 10px;
@@ -279,22 +311,20 @@ button:hover {
   font-weight: bold;
   color: #0f0f0f;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  z-index: 1000; /* 🔝 Garante que fique por cima de outros elementos */
+  z-index: 1000;
 }
+
+/* Título do jogo sem margens extras */
 .titulo-fixo {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 2.5rem;
   font-weight: bold;
   color: #0f0f0f;
-  z-index: 999;
-  
-  padding: 10px 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: -50px 0 0 0;  /* margem negativa em cima para subir o título */
+  padding: 0;   /* Garante que não tenha espaçamento interno */
+  line-height: 1.2; /* Deixa mais compacto */
 }
+
+
 
 .cercamento-reservado {
   min-height: 280px; /* altura fixa que evita o "salto" */
@@ -323,4 +353,85 @@ button:hover {
   text-align: center;
 }
 
+/* /////////// Quado de resultado      ///////////////// */
+/* Quadrado fixo à esquerda */
+.quadro-resultados {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  width: 220px;              /* largura do “quadrado” */
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+  max-height: 85vh;          /* evita estourar a tela */
+  overflow: auto;            /* rolagem se tiver muitos cards */
+}
 
+.qr-titulo {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.qr-status,
+.qr-erro {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.qr-erro { color: #c62828; }
+
+.qr-card {
+  background: #f9f9f9;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.qr-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.qr-data { color: #333; }
+.qr-hora { color: #555; }
+
+.qr-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.qr-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.qr-pos {
+  width: 28px;
+  text-align: right;
+  color: #777;
+}
+
+.qr-num {
+  flex: 1;
+  color: #111;
+}
+
+.qr-vazio {
+  color: #888;
+  font-size: 0.9rem;
+}
+/* ///////////////////////////////////////////////////////// */

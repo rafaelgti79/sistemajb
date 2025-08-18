@@ -1,10 +1,12 @@
-import { useState, useEffect, useCallback  } from 'react';
+import { useState, useEffect, useCallback, useRef  } from 'react';
 import EscPosEncoder from './utils/EscPosEncoder';
 //import { formatarDadosParaEnvio, enviarAposta } from './services/apostas'; // Importando as funções
 import { adicionarExtracao, adicionarPalpiteService } from './services/extracaoService';  // Importando a função de adicionar extração
 import CurrencyInput from 'react-currency-input-field';
 import QRCode from 'qrcode';
 import './App.css';
+import api from './constants/api';
+import { useAuth } from './context/AuthContext';
 
 
 
@@ -18,6 +20,10 @@ const bichos = [
 
 
 function App() {
+const [dados1, setDados1] = useState([]); // antes estava null
+const [dados, setDados] = useState([]);
+
+const [carregando, setCarregando] = useState(false);
 
 const [credito, setCredito] = useState(0);
 const [grupo, setGrupo] = useState('');
@@ -29,7 +35,7 @@ const [printerStatus, setPrinterStatus] = useState('🔌 Procurando impressora..
 const [grupoSelecionado, setGrupoSelecionado] = useState(null);
 const [mostrarCercas, setMostrarCercas] = useState(false);
 const [numerosSelecionados, setNumerosSelecionados] = useState([1]);
-const [cercSelecionado, setCercSelecionado] = useState([]);
+const [cercSelecionado, setCercSelecionado] = useState([1]);
 const [dezenaNumerosSelecionados, setDezenaNumerosSelecionados] = useState([]);
 const [dezenaCercSelecionado, setDezenaCercSelecionado] = useState(null);
 const [centenaNumerosSelecionados, setCentenaNumerosSelecionados] = useState([]);
@@ -53,12 +59,21 @@ const [ternoDmePalpites, setTernoDmePalpites] = useState([]);
 const [grupoPalpites, setGrupoPalpites] = useState([]);
 const [showModal, setShowModal] = useState(false);  // Estado para controlar a visibilidade do modal
 const [finalizarAposta, setFinalizarAposta] = useState(false);  // Estado para controle da finalização da aposta
-const [horarioSelecionado, setHorarioSelecionado] = useState('');
-const [dataSelecionado, setDataSelecionado] = useState('');
-const [ponto, setPonto] = useState(12);  // Exemplo de ponto
-const [usuario, setUsuario] = useState(252); // Exemplo de usuário
-const [palpitesSalvos, setPalpitesSalvos] = useState([]);
 
+const [horariosDisponiveis, setHorariosDisponiveis] = useState([]); // array de horários do select
+const [horarioSelecionado, setHorarioSelecionado] = useState("");   // horário escolhido pelo usuário
+const [dataSelecionada, setDataSelecionada] = useState("");
+const [ponto, setPonto] = useState(24);  // Exemplo de ponto
+const [usuario, setUsuario] = useState(374); // Exemplo de usuário
+const [saldoBackend, setSaldoBackend] = useState(0);
+const [mensagemErro, setMensagemErro] = useState("");
+const [area, setArea] = useState("penha");  // Exemplo de Area
+const [creditoAtual, setCreditoAtual] = useState(0);
+
+
+
+
+const [palpitesSalvos, setPalpitesSalvos] = useState([]);
 const [dezenaPalpites, setDezenaPalpites] = useState([]);
 const [centenaPalpites, setCentenaPalpites] = useState([]);
 const [milharPalpites, setMilharPalpites] = useState([]);
@@ -71,9 +86,25 @@ const [milharCentenaNumerosSelecionados, setMilharCentenaNumerosSelecionados] = 
 const [dezeninhaPalpites, setDezeninhaPalpites] = useState([]); 
 const [dezeninhaNumerosSelecionados, setDezeninhaNumerosSelecionados] = useState([]); 
 const [globalInvertido, setGlobalInvertido] = useState(0);
+const [token, setToken] = useState("");
+
+
+const [contadorP, setContadorP] = useState(0);
+const [contadorD, setContadorD] = useState(0);
+
+
+const [mostrarResultado, setMostrarResultado] = useState(false);
+  
+  const [erro, setErro] = useState(null);
+  const timerRef = useRef(null);
+
+  //const [dataSelecionadaISO, setDataSelecionadaISO] = useState(""); // 'YYYY-MM-DD'
+
+
 
 const [abrindoPorta, setAbrindoPorta] = useState(false);
 const [idImpressoraSalva, setIdImpressoraSalva] = useState(null);
+const { login } = useAuth();
 
 const nomesDosGrupos = {
   '1': 'Grupo',
@@ -90,11 +121,160 @@ const nomesDosGrupos = {
 };
 
 
+
+// helper: formata ISO -> dd/MM/yyyy
+const formatarBR = (iso) => {
+  const [y, m, d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+};
+
+// helper: gera ISO local (sem risco de fuso)
+const toLocalISO = (date) => {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+};
+
+useEffect(() => {
+  setCreditoAtual(saldoBackend); // Sempre que o saldoBackend mudar, atualiza o crédito
+}, [saldoBackend]);
+
+//////////////////////////////// Chamar o resultado na tela//////////////////////////////////////////////
+/* useEffect(() => {
+    if (mostrarResultado) {
+      buscarResultados();
+      iniciarTimer();
+      document.addEventListener("click", resetarTimer);
+      document.addEventListener("touchstart", resetarTimer);
+    }
+
+    return () => {
+      limparTimer();
+      document.removeEventListener("click", resetarTimer);
+      document.removeEventListener("touchstart", resetarTimer);
+    };
+  }, [mostrarResultado]);
+
+  const buscarResultados = async () => {
+    try {
+      setCarregando(true);
+      const resposta = await fetch("https://cxlotto.app/api/resultados.php");
+      const json = await resposta.json();
+      setDados(json);
+    } catch (error) {
+      setErro("Erro ao buscar resultados");
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  const iniciarTimer = () => {
+    limparTimer();
+    timerRef.current = setTimeout(() => {
+      setMostrarResultado(false);
+    }, 30000); // 30s
+  };
+
+  const resetarTimer = () => {
+    iniciarTimer();
+  };
+
+  const limparTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  }; */
+
+  //////////////////////////////////////////////////////////////////////
+
+////////////////////////// Carrega já na tela o Resultado////////////////////////////////////////////
+/*  useEffect(() => {
+    const carregarResultados = async () => {
+      try {
+        setCarregando(true);
+        setErro(null);
+
+        // 🔁 TROQUE pela sua URL real:
+        const response = await fetch("https://cxlotto.app/api/resultados.php");
+
+        // Garante que veio JSON
+        const contentType = response.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          throw new Error("A resposta da API não é JSON.");
+        }
+
+        const data = await response.json();
+        // Garantia: se não vier array, converte para array
+        setDados(Array.isArray(data) ? data : [data]);
+      } catch (e) {
+        console.error(e);
+        setErro("Não foi possível carregar os resultados.");
+      } finally {
+        setCarregando(false);
+      }
+    };
+
+    carregarResultados();
+  }, []);  */
+
+// Buscar dados da API
+// Buscar dados da API (filtra hoje e amanhã, mantém ISO)
+// Buscar dados da API
+const buscarHorarios = async () => {
+  setCarregando(true);
+  try {
+    const res = await api.get("horarios.php");
+    setDados1(res.data); // já vem como array
+  } catch (error) {
+    console.error("Erro ao buscar horários:", error);
+  } finally {
+    setCarregando(false);
+  }
+};
+
+// Ao carregar o componente
+useEffect(() => {
+  buscarHorarios();
+}, []);
+
+// Função para formatar a data como "YYYY-MM-DD"
+/* const formatarData = (data) => {
+  const ano = data.getFullYear();
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  const dia = String(data.getDate()).padStart(2, "0");
+  return `${ano}-${mes}-${dia}`;
+}; */
+
+// Filtrar horários da data escolhida
+const handleDataChange = (e) => {
+  const dataEscolhida = e.target.value;
+  setDataSelecionada(dataEscolhida);
+
+  const item = dados1.find((d) => d.data === dataEscolhida);
+  setHorariosDisponiveis(item ? item.horarios : []);
+  setHorarioSelecionado(""); // reseta o horário selecionado
+};
+
+// Exemplo: pegar apenas a data de hoje
+useEffect(() => {
+  const hoje = formatarData(new Date());
+  const itemHoje = dados1.find((d) => d.data === hoje);
+  if (itemHoje) {
+    setDataSelecionada(itemHoje.data);
+    setHorariosDisponiveis(itemHoje.horarios);
+  }
+}, [dados1]);
+
+
+  const handleHorarioChange = (e) => {
+    console.log("Horário escolhido:", e.target.value);
+  };
+
+
 /////////////////////INICIO///////////////////
 //Salvar palpites no localStorage sempre que forem atualizados:
-useEffect(() => {
+/* useEffect(() => {
 localStorage.setItem('palpitesSalvos', JSON.stringify(palpitesSalvos));
-}, [palpitesSalvos]);
+}, [palpitesSalvos]); */
 
 //Restaurar palpites salvos do localStorage quando o componente for montado:
 useEffect(() => {
@@ -184,6 +364,9 @@ const adicionarPalpite = async () => {
     setNumerosSelecionados,
     setCercSelecionado
   });
+
+  // Atualiza crédito local
+  setCreditoAtual(prev => prev - parseFloat(valor.replace(',', '.')));
   
   setGrupoPalpites([]);
   setDezenaPalpites([]);
@@ -194,6 +377,7 @@ const adicionarPalpite = async () => {
   setTernoGrupoPalpites([]);
   setMilharCentenaPalpites([]);
   setDezeninhaPalpites([]);
+  setValor([]);
 };
 ////////////FIM/////////////////////////
 
@@ -271,9 +455,11 @@ useEffect(() => {
 
 // Função de impressão
 // Ajuste na função de impressão para receber 'novaExtracao'
-const imprimirPalpites = async (palpites, novaExtracao) => {
+const imprimirPule = async (respostaBackend) => {
+  const { pule, palpites } = respostaBackend;
+
   if (!impressoraEstaAberta(portaSerial)) {
-    alert("❌ Impressora não conectada");
+  //  alert("❌ Impressora não conectada");
     return;
   }
 
@@ -281,51 +467,58 @@ const imprimirPalpites = async (palpites, novaExtracao) => {
     const writer = portaSerial.writable.getWriter();
     const encoder = new TextEncoder();
 
-    const dataAtual = new Date();
-    const dataFormatada = dataAtual.toLocaleDateString();
-    const horaFormatada = horarioSelecionado || dataAtual.toLocaleTimeString();
-
     let texto = "";
     texto += "***************\n";
     texto += "   BILHETE\n";
     texto += "***************\n\n";
-    texto += `Usuário: ${usuario}\n`;
-    texto += `Data: ${dataFormatada}\n`;
-    texto += `Hora: ${horaFormatada}\n\n`;
 
-    // Soma total dos palpites
-    const somaTotal = palpites.reduce((acc, p) => acc + (p.valor || 0), 0);
-    texto += `TOTAL: R$ ${somaTotal.toFixed(2)}\n\n`;
+    texto += `Chave: ${pule.chave}\n`;
+    texto += `Data: ${pule.dataExtracao}\n`;
+    texto += `Hora: ${pule.horarioExtracao}\n`;
+    texto += `Valor: R$ ${pule.valor}\n\n`;
 
     texto += "Palpites:\n";
-    palpites.forEach((p, i) => {
-      const nomeGrupo = nomesDosGrupos[p.grupo] || `Grupo ${p.grupo}`;
-      texto += `${nomeGrupo} ${p.palpite} -R$:${p.valor.toFixed(2)}\n`;
+    palpites.forEach((p) => {
+      texto += `Grupo ${p.modalidade}: ${p.palpite} - R$: ${p.valor}\n`;
     });
 
-    // Envia texto do bilhete
     await writer.write(encoder.encode(texto));
 
-    // Pequeno espaço antes do QR Code
-    await writer.write(encoder.encode("\n\n"));
+    // QR Code (opcional)
+    if (pule.chave) {
+      const qrBytes = await gerarQRCodeBytes(pule.chave);
+      await writer.write(qrBytes);
+    }
 
-    // Gera e envia QR Code
-    const qrBytes = await gerarQRCodeBytes(novaExtracao.id);
-    await writer.write(qrBytes);
-
-    // Mensagem de agradecimento no final
     await writer.write(encoder.encode("\nObrigado por jogar!\n\n\n"));
-
-    
-    // Finaliza impressão
     writer.releaseLock();
-
-   // alert("✅ Cupom impresso com sucesso");
   } catch (error) {
-    console.error("❌ Erro ao imprimir cupom:", error);
-    alert("Erro ao imprimir cupom");
+    console.error("Erro ao imprimir cupom:", error);
+   // alert("Erro ao imprimir cupom");
   }
 };
+
+
+const formatarData = (dataIso) => {
+  if (!dataIso) return "";
+  
+  // Se já for uma string no formato ISO (yyyy-mm-dd)
+  if (typeof dataIso === "string") {
+    const partes = dataIso.split('-'); // ["2025","08","16"]
+    return `${partes[2]}/${partes[1]}/${partes[0]}`; // "16/08/2025"
+  }
+
+  // Se for um objeto Date
+  if (dataIso instanceof Date) {
+    const dia = String(dataIso.getDate()).padStart(2, "0");
+    const mes = String(dataIso.getMonth() + 1).padStart(2, "0");
+    const ano = dataIso.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+
+  return "";
+};
+
 
 // Finalizar aposta
 const handleFinalizarAposta = async () => {
@@ -335,37 +528,45 @@ const handleFinalizarAposta = async () => {
   }
 
   try {
-    // Se não tiver porta aberta, tenta reconectar
+    // Conecta impressora, se necessário
     if (!impressoraEstaAberta(portaSerial)) {
       await conectarImpressoraAutomaticamente();
+      if (!impressoraEstaAberta(portaSerial)) {
+        await selecionarImpressora();
+      }
     }
 
-    // Ainda não conectou? então pede manualmente
-    if (!impressoraEstaAberta(portaSerial)) {
-      await selecionarImpressora();
-    }
-
-    // Adiciona a nova extração e armazena o retorno
-    const novaExtracao = await adicionarExtracao({
+    
+    // Envia palpites para o backend e recebe resposta
+    const respostaBackend = await adicionarExtracao({
+      area,
       ponto,
-      usuario,
+      usuario: login.id,
       credito,
       palpites: palpitesSalvos,
-      horarioSelecionado
+      horarioSelecionado,
+      dataSelecionada,
+      token: login.token // passa o token
     });
 
-    console.log('Nova extração adicionada:', novaExtracao);
+    // Atualiza saldo com o que o backend retornou
+    if (respostaBackend.saldo !== undefined) {
+      setSaldoBackend(respostaBackend.saldo);
+      console.log("Saldo atualizado:", respostaBackend.saldo);
+    }
 
-    // Agora passa 'novaExtracao' para imprimir
-    await imprimirPalpites(palpitesSalvos, novaExtracao);
+    console.log("Resposta do backend:", respostaBackend);
 
+    // Imprime usando a resposta do backend
+    await imprimirPule(respostaBackend);
+
+    // Limpa palpites e valor
     setPalpitesSalvos([]);
-    setValor('');
-   // alert('Aposta finalizada e impressa com sucesso!');
+    setValor("");
 
   } catch (error) {
-    console.error('Erro ao finalizar aposta:', error);
-    alert('Erro ao finalizar aposta ou imprimir. Tente novamente.');
+    console.error("Erro ao finalizar aposta:", error);
+    alert("Erro ao finalizar aposta ou imprimir. Tente novamente.");
   }
 };
 
@@ -373,21 +574,23 @@ const handleFinalizarAposta = async () => {
 
 
 /////////////////////INICIO///////////////////
-const handleHorarioChange = (event) => {
+/* const handleHorarioChange = (event) => {
 setHorarioSelecionado(event.target.value);
 };
 
 const handleDataChange = (event) => {
 setDataSelecionado(event.target.value);
-};
+}; */
 ////////////FIM/////////////////////////
 
 
 /////////////////////INICIO///////////////////
   // Função para exibir o modal ao finalizar a aposta
   const handleFinalizar = () => {
-    setShowModal(true);  // Exibe o modal quando o botão "Finalizar" for clicado
-  };
+  
+  // Se todas as validações passarem, exibe o modal
+  setShowModal(true);
+};
 
 
   // Função para fechar o modal
@@ -563,39 +766,44 @@ const adicionarTernoDezenaAleatorio = () => {
 const toggleTernoDezenaNumero = (num) => {
   if (ternoDezenaNumerosSelecionados.length === 1) {
     // Já tem 1 dígito → cria o número com 2 dígitos
-    const numero = `${ternoDezenaNumerosSelecionados[0]}${num}`;
-    setTernoDezenaPalpites([...ternoDezenaPalpites, numero.padStart(2, '0')]);
-    setTernoDezenaNumerosSelecionados([]); // limpa para próxima entrada
+    const numero = `${ternoDezenaNumerosSelecionados[0]}${num}`.padStart(2, '0');
+
+    // Checa se atingiu o máximo de 20 palpites
+    if (ternoDezenaPalpites.length < 20) {
+      setTernoDezenaPalpites([...ternoDezenaPalpites, numero]);
+    } else {
+      alert("Você só pode selecionar até 20 números no Terno Dezena.");
+    }
+
+    // Limpa os dígitos temporários para próxima entrada
+    setTernoDezenaNumerosSelecionados([]);
+
   } else {
     // Adiciona o dígito clicado
     setTernoDezenaNumerosSelecionados([...ternoDezenaNumerosSelecionados, num]);
   }
 };
 
+
+
 //--------------------//----------------------//
 
 // Cercas para Duque De Terno de Grupo
-const adicionarTernoGrupoAleatorio = () => {
-  if (ternoGrupoPalpites.length >= 10) return;
-  const novo = Math.floor(Math.random() * 25) + 1; // 1 a 25
-  if (!ternoGrupoPalpites.includes(novo)) {
-    setTernoGrupoPalpites([...ternoGrupoPalpites, novo]);
-  }
-};
-
 const toggleTernoGrupoNumero = (num) => {
   if (ternoGrupoPalpites.includes(num)) {
     // Se já está incluído, remove
     setTernoGrupoPalpites(ternoGrupoPalpites.filter(n => n !== num));
   } else {
-    // Se ainda não está incluso, adiciona apenas se tiver menos de 20
-    if (duqueGrupoPalpites.length < 20) {
+    // Adiciona apenas se tiver menos de 20
+    if (ternoGrupoPalpites.length < 20) {
       setTernoGrupoPalpites([...ternoGrupoPalpites, num]);
     } else {
-      alert("Você só pode selecionar até 20 Grupos.");
+      alert("Você só pode selecionar até 20 Grupos no Terno Grupo.");
     }
   }
 };
+
+
 //--------------------//----------------------//
 
 
@@ -700,119 +908,189 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 };
   // ==== FIM DA ALTERAÇÃO =====
 
- 
+ // Ref para acumular os valores sem depender do estado diretamente
+  const acumulado = useRef({ P: 0, D: 0 });
 
-//Adiciona Saldo com a letra p.
-  useEffect(() => {
+ useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.key.toLowerCase() === 'p') {
-        setCredito((prev) => prev + 1);
+      const tecla = event.key.toLowerCase();
+
+      if (tecla === "p") {
+        setContadorP((prev) => prev + 1);
+        acumulado.current.P += 1;
+      } else if (tecla === "d") {
+        setContadorD((prev) => prev + 1);
+        acumulado.current.D += 1;
       }
     };
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
   }, []);
- // ==== FIM DO BLOCO =====
+
+  // Envia os contadores acumulados a cada 5 segundos
+
+
+ useEffect(() => {
+  const intervalo = setInterval(async () => {
+    try {
+      if (!login?.token) return; // não faz nada se não tiver token
+
+      if (acumulado.current.P > 0) {
+        const payloadP = {
+          area,
+          ponto,
+          usuario: login.id,
+          valor: acumulado.current.P,
+          tipo: "P",
+          token: login.token
+        };
+        const respostaP = await api.post("/saldo.php", payloadP);
+        console.log("Enviado JSON P:", JSON.stringify(payloadP));
+        console.log("Resposta do backend P:", respostaP.data);
+        setSaldoBackend(respostaP.data.saldo);
+        acumulado.current.P = 0;
+      }
+
+      if (acumulado.current.D > 0) {
+        const payloadD = {
+          area,
+          ponto,
+          usuario: login.id,
+          valor: acumulado.current.D,
+          tipo: "D",
+          token: login.token
+        };
+        const respostaD = await api.post("/saldo.php", payloadD);
+        console.log("Enviado JSON D:", JSON.stringify(payloadD));
+        console.log("Resposta do backend D:", respostaD.data);
+        setSaldoBackend(respostaD.data.saldo);
+        acumulado.current.D = 0;
+      }
+    } catch (error) {
+      console.error("Erro ao enviar lote de contadores:", error);
+    }
+  }, 5000);
+
+  return () => clearInterval(intervalo);
+}, [ponto, login]); // atualiza se o login (token) mudar
+// ==== FIM DO BLOCO =====
+
 
 
  
   return (
 <div className="container">
 
- <div className="topo-container">
-  <div className="saldo-box">Saldo R$: {credito}</div> {/* 🪙 Agora fixo no topo */}
-  <h1 className="titulo-fixo">Jogo do Bicho</h1>
-
+<div className="saldo-box">Saldo R$: {saldoBackend.toFixed(2)}</div>
+<div 
+  className="credito-box"
+  style={{
+    color: creditoAtual <= 0 ? 'red' : '#0f0f0f',
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    border: '2px solid #ccc',
+    borderRadius: '10px',
+    padding: '8px 16px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+    position: 'fixed',
+    top: '50px', // abaixo do saldo
+    right: '540px',
+    zIndex: 1000
+  }}
+>
+  Crédito R$: {creditoAtual.toFixed(2)}
 </div>
 
-<div>
-<select id="horario" value={horarioSelecionado} onChange={handleHorarioChange}>
-<option value="">HORARIO</option>
-<option value="14:00">14 HORAS</option>
-<option value="18:00">18 HORAS</option>
-</select>
+  <h1 className="titulo-fixo">Jogo do Bicho</h1>
 
-<select id="horario" value={dataSelecionado} onChange={handleDataChange}>
-<option value="">DATA</option>
-<option value="07/08">07/08/2025</option>
-<option value="08/08">08/07/2025</option>
-</select>
-</div>      
+<div style={{ padding: "20px" }}>
+  {/* Seletor de Data e Horário */}
+  <div style={{ display: "flex", gap: "15px", alignItems: "center", marginBottom: "20px" }}>
+    <select
+      value={dataSelecionada}
+      onChange={handleDataChange}
+      style={{
+        height: "35px",
+        width: "160px",
+        border: "2px solid #ccc",
+        borderRadius: "5px",
+        textAlign: "center",
+        padding: "0 10px",
+        fontSize: "1rem",
+        appearance: "none",
+      }}
+    >
+      <option value="">Selecione a Data</option>
+{(dados1 || []).map((item, index) => {
+  const partes = item.data.split('-'); // ["2025", "08", "16"]
+  const dataFormatada = `${partes[2]}/${partes[1]}/${partes[0]}`; // "16/08/2025"
+  
+  return (
+    <option key={index} value={item.data}>
+      {dataFormatada}
+    </option>
+  );
+})}
+    </select>
 
+    <select
+      //disabled={!dataSelecionada}
+      value={horarioSelecionado}
+      onChange={(e) => setHorarioSelecionado(e.target.value)}
+      style={{
+        height: "35px",
+        width: "160px",
+        border: "2px solid #ccc",
+        borderRadius: "5px",
+        textAlign: "center",
+        padding: "0 10px",
+        fontSize: "1rem",
+        appearance: "none",
+      }}
+    >
+      <option value="">Selecione o Horário</option>
+      {(horariosDisponiveis || []).map((hora, index) => (
+        <option key={index} value={hora}>
+          {hora}
+        </option>
+      ))}
+    </select>
+  </div>
 
+  {/* Botões de Grupo */}
 <div className="grupo-grid">
-  <div
-  className={`grupo-box ${grupoSelecionado === '1' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '1' ? null : '1')}
-  >
-    
-  Grupo
+    {[
+      { id: '1', nome: 'Grupo' },
+      { id: '2', nome: 'Dezena' },
+      { id: '3', nome: 'Centena' },
+      { id: '4', nome: 'Milhar' },
+      { id: '5', nome: 'Duque de Grupo' },
+      { id: '6', nome: 'Duque de Dezena' },
+      { id: '7', nome: 'Terno de Dezena' },
+      { id: '8', nome: 'Terno de Grupo' },
+      { id: '9', nome: 'Milhar e Centena' },
+      { id: '10', nome: 'Dezeninha' },
+    ].map((item) => (
+      <div
+        key={item.id}
+        className={`grupo-box ${
+          grupoSelecionado === item.id ? 'selecionado' : ''
+        } ${!dataSelecionada || !horarioSelecionado ? 'desabilitado' : ''}`}
+        onClick={() => {
+          if (dataSelecionada && horarioSelecionado) {
+            setGrupoSelecionado(grupoSelecionado === item.id ? null : item.id);
+          }
+        }}
+        
+      >
+        {item.nome}
+      </div>
+    ))}
   </div>
 
-  <div
-  className={`grupo-box ${grupoSelecionado === '2' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '2' ? null : '2')}
-  >
-  Dezena
-  </div>
 
-  <div
-  className={`grupo-box ${grupoSelecionado === '3' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '3' ? null : '3')}
-  >
-  Centena
-  </div>
-
-  <div
-  className={`grupo-box ${grupoSelecionado === '4' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '4' ? null : '4')}
-  >
-  Milhar
-  </div>
-
-  <div
-  className={`grupo-box ${grupoSelecionado === '5' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '5' ? null : '5')}
-  >
-  Duque de Grupo
-  </div>
-
-  <div
-  className={`grupo-box ${grupoSelecionado === '6' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '6' ? null : '6')}
-  >
-  Duque de Dezena
-  </div>
-
-  <div
-  className={`grupo-box ${grupoSelecionado === '7' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '7' ? null : '7')}
-  >
-  Terno de Dezena
-  </div>
-
-  <div
-  className={`grupo-box ${grupoSelecionado === '8' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '8' ? null : '8')}
-  >
-  Terno de Grupo
-  </div>
-
-  <div
-  className={`grupo-box ${grupoSelecionado === '9' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '9' ? null : '9')}
-  >
-  Milhar e Centena
-  </div>
-  
-  <div
-  className={`grupo-box ${grupoSelecionado === '10' ? 'selecionado' : ''}`}
-  onClick={() => setGrupoSelecionado(grupoSelecionado === '10' ? null : '10')}
-  >
-  Dezeninha
-  </div>
-  
-    
 
 </div>
 
@@ -882,7 +1160,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
   <div className="cercamento-reservado">
 
     {/* Cercas */}
-    <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center' }}>
+    <div className="cercas-grid" style={{ marginTop: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
       {[5, 6, 7].map(num => (
         <div
           key={`dezena-cerc-${num}`}
@@ -908,26 +1186,36 @@ setNumerosSelecionados([...numerosSelecionados, num]);
         ))}
 
       </div>
-       
-
-
-
-    <div style={{ margin: '10px 0', textAlign: 'center' }}>
       
-       {/* Palpites adicionados */}
-      {dezenaPalpites.map((num, idx) => (
-        <div
-          key={`dezena-palpite-${idx}`}
-          className="cerca-box"
-          style={{ backgroundColor: '#3399ff', color: 'white' }}
-        >
-          {num}
-        </div>
-      ))}
+
+      
+    {/* Palpites adicionados */}
+    
+      <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+  {dezenaPalpites.map((num, idx) => (
+    <div
+      key={`dezena-palpite-${idx}`}
+      className="cerca-box"
+      style={{
+        backgroundColor: '#3399ff',
+        color: 'white',
+        padding: '5px 10px',
+        borderRadius: '4px'
+      }}
+    >
+      {num}
     </div>
+     ))}
+</div>
+
 
     {/* Números 0 a 9 */}
-    <div className="numeros-grid" style={{ justifyContent: 'center' }}>
+    <div className="numeros-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 50px)',
+        gap: '8px',
+        justifyContent: 'center'
+      }}>
       {Array.from({ length: 10 }, (_, i) => i).map(num => (
         <div
           key={`digito-${num}`}
@@ -948,7 +1236,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 
     {/* Mostrar dezenas formadas */}
     <div style={{ marginTop: '15px', textAlign: 'center' }}>
-      <strong>Dezenas formadas:</strong> {dezenaPalpites.map(d => d.toString().padStart(2, '0')).join(', ')}
+      {/* <strong>Dezenas formadas:</strong> {dezenaPalpites.map(d => d.toString().padStart(2, '0')).join(', ')} */}
     </div>
 
     
@@ -993,12 +1281,26 @@ setNumerosSelecionados([...numerosSelecionados, num]);
         ))}
       </div>
       
-      <div style={{ margin: '10px 0', textAlign: 'center' }}>
-      <strong>Dígitos selecionados:</strong> {centenaNumerosSelecionados.join('')}
+      {/* Palpites adicionados */}
+    <div style={{ margin: '10px 0', textAlign: 'center' }}>
+      {centenaPalpites.map((num, idx) => (
+        <div
+          key={`dezena-palpite-${idx}`}
+          className="cerca-box"
+          style={{ backgroundColor: '#3399ff', color: 'white' }}
+        >
+          {num}
+        </div>
+      ))}
     </div>
 
     {/* Números 0 a 9 */}
-    <div className="numeros-grid" style={{ justifyContent: 'center' }}>
+    <div className="numeros-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 50px)',
+        gap: '8px',
+        justifyContent: 'center'
+      }}>
       {Array.from({ length: 10 }, (_, i) => i).map(num => (
         <div
           key={`digito-${num}`}
@@ -1018,9 +1320,9 @@ setNumerosSelecionados([...numerosSelecionados, num]);
     </div>
 
     {/* Mostrar dezenas formadas */}
-    <div style={{ marginTop: '15px', textAlign: 'center' }}>
+    {/* <div style={{ marginTop: '15px', textAlign: 'center' }}>
       <strong>Dezenas formadas:</strong> {centenaPalpites.map(d => d.toString().padStart(3, "0")).join(',')}
-    </div>
+    </div> */}
 
 
   </div>
@@ -1073,7 +1375,12 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 
     
 {/* Números 0 a 9 */}
-<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+<div className="numeros-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 50px)',
+        gap: '8px',
+        justifyContent: 'center'
+      }}>
   {Array.from({ length: 10 }, (_, i) => i).map(num => (
     <div
       key={`digito-milhar-${num}`}
@@ -1093,9 +1400,9 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 </div>
 
 {/* Mostrar milhares formados */}
-<div style={{ marginTop: '15px', textAlign: 'center' }}>
+{/* <div style={{ marginTop: '15px', textAlign: 'center' }}>
   <strong>Milhares formados:</strong> {milharPalpites.join(',')}
-</div>
+</div> */}
 
   </div>
 )}
@@ -1180,7 +1487,12 @@ setNumerosSelecionados([...numerosSelecionados, num]);
     </div>
 
     {/* Números 0 a 9 */}
-<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+<div className="numeros-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 50px)',
+        gap: '8px',
+        justifyContent: 'center'
+      }}>
   {Array.from({ length: 10 }, (_, i) => i).map(num => (
     <div
       key={`digito-milhar-${num}`}
@@ -1231,7 +1543,12 @@ setNumerosSelecionados([...numerosSelecionados, num]);
     </div>
 
     {/* Números 0 a 9 */}
-<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+<div className="numeros-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 50px)',
+        gap: '8px',
+        justifyContent: 'center'
+      }}>
   {Array.from({ length: 10 }, (_, i) => i).map(num => (
     <div
       key={`digito-milhar-${num}`}
@@ -1264,7 +1581,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
       <div
         className="cerca-box"
         style={{ cursor: 'pointer', backgroundColor: '#ccc', fontWeight: 'bold' }}
-        onClick={adicionarTernoGrupoAleatorio}
+        
       >
         +
       </div>
@@ -1357,7 +1674,12 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 
     
 {/* Números 0 a 9 */}
-<div className="numeros-grid" style={{ justifyContent: 'center' }}>
+<div className="numeros-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 50px)',
+        gap: '8px',
+        justifyContent: 'center'
+      }}>
   {Array.from({ length: 10 }, (_, i) => i).map(num => (
     <div
       key={`digito-milhar-${num}`}
@@ -1377,9 +1699,9 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 </div>
 
 {/* Mostrar milhares formados */}
-<div style={{ marginTop: '15px', textAlign: 'center' }}>
+{/* <div style={{ marginTop: '15px', textAlign: 'center' }}>
   <strong>Milhares formados:</strong> {milharCentenaPalpites.join(',')}
-</div>
+</div> */}
 
   </div>
 )}
@@ -1452,35 +1774,94 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 
 
  {/* Botão para finalizar a aposta */}
- <CurrencyInput
-  id="input-valor"
-  name="valor"
-  placeholder="R$ 0,00"
-  decimalsLimit={2}
-  decimalSeparator=","
-  groupSeparator="."
-  prefix="R$ "
-  value={valor}
-  onValueChange={(value) => setValor(value)}
-/>
+<div>
+      <CurrencyInput
+        id="input-valor"
+        name="valor"
+        placeholder="R$ 0,00"
+        decimalsLimit={2}
+        decimalSeparator=","
+        groupSeparator="."
+        prefix="R$ "
+        value={valor}
+        onValueChange={(value) => {
+          const valorNumerico = parseFloat(value || 0);
 
-      <button 
-        onClick={handleFinalizar}
-        style={{
-          padding: '10px 20px', 
-          backgroundColor: '#4CAF50', 
-          color: 'white', 
-          fontWeight: 'bold', 
-          border: 'none', 
-          cursor: 'pointer',
-          marginTop: '20px'
+          if (valorNumerico <= saldoBackend) {
+            setValor(value);
+            setMensagemErro(""); // limpa o erro
+          } else {
+            setMensagemErro(`O valor não pode ser maior que R$ ${saldoBackend}`);
+          }
         }}
-      >
-        Finalizar Aposta
-      </button>
-      <button onClick={adicionarPalpite}>Adicionar Palpite</button>
+      />
 
-      
+      {mensagemErro && (
+        <p style={{ color: "red", marginTop: "5px" }}>{mensagemErro}</p>
+      )}
+    </div>
+  
+
+
+  <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
+  <button 
+    onClick={handleFinalizar}
+    disabled={palpitesSalvos.length === 0}
+    style={{
+      padding: '10px 20px', 
+      backgroundColor: palpitesSalvos.length === 0 ? '#ccc' : '#4CAF50', 
+      color: 'white', 
+      fontWeight: 'bold', 
+      border: 'none', 
+      cursor: palpitesSalvos.length === 0 ? 'not-allowed' : 'pointer',
+      borderRadius: '5px',
+      transition: 'background-color 0.3s ease'
+    }}
+  >
+    Finalizar Aposta
+  </button>
+
+<button 
+  onClick={adicionarPalpite}
+  disabled={
+    !valor || 
+    (grupoSelecionado === '7' && ternoDezenaPalpites.length < 3) || // Terno de Dezena
+    (grupoSelecionado === '8' && ternoGrupoPalpites.length < 3)  ||    // Terno de Grupo
+    (grupoSelecionado === '5' && duqueGrupoPalpites.length < 2)   ||  // Duque de Grupo
+    (grupoSelecionado === '6' && duqueDezenaPalpites.length < 2)    // Duque de Dezena
+  }
+  style={{
+    padding: '10px 20px',
+    backgroundColor: (
+      !valor || 
+      (grupoSelecionado === '7' && ternoDezenaPalpites.length < 3) || 
+      (grupoSelecionado === '8' && ternoGrupoPalpites.length < 3)||
+      (grupoSelecionado === '5' && duqueGrupoPalpites.length < 2) ||
+      (grupoSelecionado === '6' && duqueDezenaPalpites.length < 2)
+    ) ? '#ccc' : '#2196F3',
+    color: 'white',
+    fontWeight: 'bold',
+    border: 'none',
+    cursor: (
+      !valor || 
+      (grupoSelecionado === '7' && ternoDezenaPalpites.length < 3) || 
+      (grupoSelecionado === '8' && ternoGrupoPalpites.length < 3) ||
+      (grupoSelecionado === '5' && duqueGrupoPalpites.length < 2) ||
+      (grupoSelecionado === '6' && duqueDezenaPalpites.length < 2)
+    ) ? 'not-allowed' : 'pointer',
+    borderRadius: '5px',
+    transition: 'background-color 0.3s ease'
+  }}
+>
+  Adicionar Palpite
+</button>
+
+
+
+
+
+</div>
+
       
       {/* Aqui começa o modal */}
       {showModal && (
@@ -1489,7 +1870,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
           <div style={modalStyle}>
             <h2>Resumo da Aposta</h2>
             <div>
-              <p><strong>DATA:</strong> {dataSelecionado}</p>
+              <p><strong>DATA:</strong> {dataSelecionada}</p>
               <p><strong>HORÁRIO:</strong> {horarioSelecionado}</p>
               <p><strong>PALPITES:</strong></p>
               <ul>
@@ -1503,7 +1884,7 @@ setNumerosSelecionados([...numerosSelecionados, num]);
             </div>
             <button
               onClick={() => {
-                alert('Aposta finalizada com sucesso!');
+                
                 setShowModal(false);
                 handleFinalizarAposta();
                 setPalpitesSalvos([]);
@@ -1525,14 +1906,8 @@ setNumerosSelecionados([...numerosSelecionados, num]);
 </div>
 
       
-       { <div>
         
-        <button onClick={selecionarImpressora}>🔌 Selecionar Impressora</button>
-      </div> }
-
-      <p style={{ marginTop: '10px', fontWeight: 'bold' }}>{printerStatus}</p>
-
-      {mensagem && <p className="mensagem">{mensagem}</p>} 
+     
 <div>
   <h3>Palpites Salvos</h3>
   <ul>
@@ -1543,12 +1918,145 @@ setNumerosSelecionados([...numerosSelecionados, num]);
   </div>
 ))}
 
-  </ul>
-  
+ </ul>
 </div>
 
+     { <div>
+        <button onClick={selecionarImpressora}>🔌 Selecionar Impressora</button>
+      </div> }
 
-    
+      <p style={{ marginTop: '10px', fontWeight: 'bold' }}>{printerStatus}</p>
+
+      {mensagem && <p className="mensagem">{mensagem}</p>} 
+
+    {/*  {  <div className="quadro-resultados">
+      <h3 className="qr-titulo">Resultados</h3>
+
+      {carregando && <div className="qr-status">Carregando…</div>}
+      {erro && <div className="qr-erro">{erro}</div>}
+
+      {dados.map((item, idx) => {
+        const dataFormatada = item?.data
+          ? new Date(item.data).toLocaleDateString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })
+          : "-";
+
+        const lista = item?.resultado
+          ? String(item.resultado).split(",")
+          : [];
+
+        return (
+          <div className="qr-card" key={idx}>
+            <div className="qr-header">
+              <span className="qr-data">{dataFormatada}</span>
+              <span className="qr-hora">{item?.horario || "-"}</span>
+            </div>
+
+            <div className="qr-lista">
+              {lista.length > 0 ? (
+                lista.map((numero, i) => (
+                  <div className="qr-item" key={i}>
+                    <span className="qr-pos">{i + 1}°</span>
+                    <span className="qr-num">{numero}</span>
+                  </div>
+                ))
+              ) : (
+                <div className="qr-vazio">Sem resultados</div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div> }
+ */}
+  
+    {/* Botão para abrir }
+      <button onClick={() => setMostrarResultado(true)}>Abrir resultado</button>
+
+    {/*  {/*  {/* Modal centralizado /}
+      {mostrarResultado && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0, left: 0,
+            width: "100%", height: "100%",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999
+          }}
+        >
+          <div
+            style={{
+              background: "#fff",
+              padding: "20px",
+              borderRadius: "8px",
+              width: "300px",
+              maxHeight: "80vh",
+              overflowY: "auto",
+              textAlign: "center"
+            }}
+          >
+            {carregando && <p>Carregando...</p>}
+            {erro && <p style={{ color: "red" }}>{erro}</p>}
+            {!carregando && !erro && dados.length > 0 && (
+              dados.map((item, index) => (
+                <div key={index} style={{ marginBottom: "15px" }}>
+                  <strong>
+                    {new Date(item.data).toLocaleDateString("pt-BR")} - {item.horario}
+                  </strong>
+                  <div style={{ marginTop: "5px" }}>
+                    {item.resultado.split(",").map((num, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          border: "1px solid #ddd",
+                          padding: "5px",
+                          margin: "2px",
+                          borderRadius: "4px"
+                        }}
+                      >
+                        {idx + 1}° {num}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )} }
+    </div>
+  
+
+{/* <div style={{ padding: "20px" }}>
+      <h1>Contador de Teclas</h1>
+      <p>Tecla P: {contadorP}</p>
+      <p>Tecla D: {contadorD}</p>
+    </div> */}
+
+{/* <div style={{ padding: "20px" }}>
+      <h1>Lista de Horários</h1>
+      <button onClick={buscarHorarios} disabled={carregando}>
+        {carregando ? "Carregando..." : "Mostrar Horários"}
+      </button>
+
+      {dados && (
+        <div style={{ marginTop: "20px" }}>
+          <p>Data: {dados.data}</p>
+          <ul>
+            {dados.horarios.map((hora, index) => (
+              <li key={index}>{hora}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div> */}
+  
       
 {        /*   <img src="./Pixmaquina.png" alt="Bicho logo" className="logo-canto" /> */}
     </div>

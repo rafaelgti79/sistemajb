@@ -1,5 +1,8 @@
 // extracaoService.js
 import { v4 as uuidv4 } from 'uuid';
+import api from '../constants/api';
+
+
 
 
 const formatarComDoisDigitos = (numeros) => {
@@ -12,7 +15,7 @@ const formatarComDoisDigitos = (numeros) => {
 };
 
 
-const BASE_URL = 'http://localhost:5000/palpites';
+/* const BASE_URL = 'http://localhost:5000/palpites';
 
 // CREATE
 export const enviarPalpiteParaServidor = async (palpite) => {
@@ -28,16 +31,6 @@ export const enviarPalpiteParaServidor = async (palpite) => {
   }
 };
 
-/* // READ (listar todos os palpites)
-export const buscarPalpitesDoServidor = async () => {
-  try {
-    const response = await fetch(BASE_URL);
-    return await response.json();
-  } catch (error) {
-    console.error('Erro ao buscar palpites:', error);
-    return [];
-  }
-}; */
 
 // DELETE
 export const excluirPalpiteDoServidor = async (id) => {
@@ -65,7 +58,7 @@ export const atualizarPalpiteNoServidor = async (id, palpiteAtualizado) => {
     console.error('Erro ao atualizar palpite:', error);
   }
 };
-
+ */
 
 
 //Salvar palpite
@@ -134,14 +127,17 @@ export const adicionarPalpiteService = ({
   if (!numerosSelecionadosFormatados) return;
 
   const novoPalpite = {
-    id: uuidv4(),
+   // area: area,   
     modalidade: grupoSelecionado,
-    palpite: numerosSelecionadosFormatados, // todos juntos no mesmo palpite
+    palpite: numerosSelecionadosFormatados.split(","), // todos juntos no mesmo palpite
     valor: parseFloat(valor.replace(',', '.')),
-    cercado: gerarCercado(cercSelecionado),
+    cercado: gerarCercado(cercSelecionado)
+    .toString()
+    .split("")
+    .map(n => parseInt(n, 10)),
     invertido: globalInvertido,
-    horarioSelecionado,
-    grupo: grupoSelecionado, // associa o grupo atual ao palpite
+    
+    //grupo: grupoSelecionado, // associa o grupo atual ao palpite
   };
 
   // Adiciona no array de palpites
@@ -154,8 +150,51 @@ export const adicionarPalpiteService = ({
 
 
 
+export const adicionarExtracao = async ({
+  area: area,
+  ponto,
+  usuario,
+  credito,
+  palpites,
+  horarioSelecionado,
+  dataSelecionada,
+  token
+}) => {
+  const novaExtracao = {
+    area,
+    
+    //dataExtracao: new Date().toLocaleDateString(),
+    dataExtracao: dataSelecionada, 
+	  horarioExtracao: horarioSelecionado, 
+    //horarioExtracao: new Date().toLocaleTimeString(),
+    //horarioExtracao: horarioSelecionado || new Date().toLocaleTimeString(),
+    ponto,
+    usuario,
+    credito,
+    palpites,  // agora vem todos os palpites adicionados
+    token
+  };
 
-// Função para adicionar uma nova extração
+ // ✅ Log do que será enviado
+  console.log("Dados enviados via POST:", novaExtracao);
+
+  try {
+    const resposta = await api.post('/gravaPalpites.php', novaExtracao, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // ✅ Log da resposta do servidor
+    console.log("Resposta do servidor:", resposta.data);
+
+    return resposta.data;
+  } catch (error) {
+    console.error('Erro ao adicionar nova extração:', error);
+    throw error;
+  }
+};
+/* // Função para adicionar uma nova extração
 export const adicionarExtracao = async ({
   ponto,
   usuario,
@@ -165,32 +204,62 @@ export const adicionarExtracao = async ({
 }) => {
   const novaExtracao = {
     dataExtracao: new Date().toLocaleDateString(),
-    //horarioExtracao: new Date().toLocaleTimeString(),
     horarioExtracao: horarioSelecionado || new Date().toLocaleTimeString(),
     ponto,
     usuario,
     credito,
-    palpites  // agora vem todos os palpites adicionados
+    palpites
   };
 
   try {
-    const resposta = await fetch('http://localhost:5000/extracoes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(novaExtracao),
-    });
-
-    const resultado = await resposta.json();
-    //console.log('Nova extração adicionada:', resultado);
-    return resultado;
+   const resposta = await api.post("/extracoes", novaExtracao);
+    return resposta.data;
   } catch (error) {
-    console.error('Erro ao adicionar nova extração:', error);
+    console.error("Erro ao adicionar nova extração:", error);
     throw error;
   }
 };
 
+ */
 
+//gravaPalpites.php
 
+/* {
+  "credito": 0,
+  "dataExtracao": "15/08/2025",
+  "horarioExtracao": "21 Horas",
+  "palpites": [
+    {
+      "cercado": [1,0,0,0,0,0,0,0],
+      "grupo": "1",
+      "horarioSelecionado": null,
+      "usuario": 347,
+      "invertido": 0,
+      "modalidade": "1",
+      "palpite": ["01","02"],
+      "token": "e825159f92125bfbc0998df2fac07574",
+      "valor": 2
+    }
+  ],
+  "ponto": 24
+  
+} */
 
+/* {
+  "credito": 0,
+  "dataExtracao": "15/08/2025",
+  "horarioExtracao": "21 Horas",
+  "usuario": 347,
+  "ponto": 24,
+  "palpites": [
+    {
+       "modalidade": 1,
+       "palpite": ["01","02"],
+       "valor": 2,
+      "cercado": [1,0,0,0,0,0,0,0],
+      "grupo": "1",
+      "invertido": 0}
+     ],
+      
+      "token": "e825159f92125bfbc0998df2fac07574"
+    } */
